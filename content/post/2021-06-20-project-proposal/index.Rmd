@@ -65,10 +65,14 @@ Finally, most human activities have some sort of seasonality. However, it can be
 
 Past what has already been done this project will now (likely) begin with an uncertainty, sensitivity and risk analysis in the standard approach of assigning a probability distribution to each model input to represent its uncertainty. The application of this project will use the Black Scholes construction to illuminate and demonstrate the limitations of Monte Carlo techniques when applied to stock market data. More theoretically, this work asks “what if” we re-constructed our reference model to allow for random variables in place of numerical values and ran the entire model with this substitution. To accomplish this goal of substituting random variables for real-valued model inputs it is necessary to extend the established theory of functions of random variables. This theory extension will go far enough to include functions we find not only in the reference model, but in general business-style models. By considering model implementation (as opposed to black-box thinking where only model outputs are captured), contrasting results of model analysis will be obtained.
 
+<!--- This is getting pretty complicated. I'm not sure exactly what you are trying to accomplish here or whether it's possible. Perhaps options pricing models might work, but those typically assume an underlying rationality--a dubious assumption in this case. My bet is that you'd have more luck looking for external drivers of price movement (i.e. news / twitter). -->
+
 ### Outcomes:
 Ultimately, in order to make progress in this field, I should be able to find a combination of existing methods or develop an alternate proposal for a model which can be applied to cryptocurrency prices.
 
 In this moment, a simple moving average performs surprisingly well in predicting cryptocurrency price, but it is highly volatile and does not adapt well to unexpected market movement. 
+
+<!--- and may only work well because prices have been on a steady rise -->
 
 # Conclusion
 
@@ -77,6 +81,8 @@ As cryptocurrency continues to grow in popularity and attract attention from inv
 As before, this model will be designed for a specific set of cryptocurrencies, but as it accounts for more general conditions, it could be applied to other currencies or financial trends.
 
 This project could grow into a framework for autonomous trading, but at the same time could be limited by an algorithm's difficulty adapting to single, traumatic market events. The true challenge would be to see if we can outperform trading calls made by human judgment.
+
+<!--- risky project. Let's see what the group says when you present -->
 
 # Don't let this be you!
 	
