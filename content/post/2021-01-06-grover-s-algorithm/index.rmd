@@ -24,8 +24,6 @@ IBMQ.save_account('ee9c9da0c83a6c001e34e8e124afbceb074dedb0e93b4fb8995b0bbce8a75
 The **Grover Algorithm** is a search function which returns "True" for one of its possible inputs, and "False" for all the others; its purpose is to find any object in the database that would return "True". Grover's algorithm has a lot of applications, and can be used for estimating the mean and median of a set of numbers, and for solving the collision problem. In addition, it can be used to perform exhaustive searches over the set of possible solution. It is the fastest possible quantum algorithm for searching an unsorted database.
 
 Grover's algorithm was designed to speed up an unstructured database search quadratically. It is comprised of Hadamard gates, an oracle, controlled-Z gates, and a reflection. We will discuss each of these pieces in turn. First, here is a visual representation of the Grover circuit:
-
-
 ```{python}
 from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit
 from numpy import pi
@@ -58,7 +56,235 @@ Suppose you are given a large list of $N$ items. Among these items there is one 
 
 In classical computation, the search (on average) would require checking $N/2$ items, and at worst all $N$ items. On a quantum computer, however, we can find the marked item in roughly $\sqrt{N}$ steps with Grover's algorithm, which is a significant improvement to computational efficiency. Since the algorithm does not depend on the structure of the database itself, it can be used more generically.
 
+*The Hadamrad Gate*
+The <b>Hadamard gate</b> is a single-qubit operation that creates an uniform superposition of the two basis states (a measurement of an output state will return 1 or 0 with equal probabilities).
 
+In coordinates, the Hadamard gate applies the <i>Hadamard Matrix</i> to a coordinatized qubit:
+$$H=\frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1\\1 & -1\end{bmatrix}$$
+
+For example, maps the observational basis state |0⟩ to the superimposed state $\frac{|0\rangle+|1\rangle}{\sqrt{2}}$ and |1⟩ to $\frac{|0\rangle-|1\rangle}{\sqrt{2}}$ 
+
+The Hadamard gate can also be considered geometrically as a 90º rotation of the Bloch Sphere about the Y-axis, followed by a 180º rotation about the X-axis.
+
+<i>Advanced Note</i>: The Hadamard gate is the lowest dimensional case (one-qubit) of the quantum Fourier transform.
+
+*The Oracle*
+For this example, consider the database to be all the possible computational basis states our qubits can be in. 
+If we have 3 qubits, the states would run from  $|000\rangle, |001\rangle, \dots |111\rangle$.
+
+Grover’s algorithm involves oracles that add a negative phase to the solution states. I.e. for any state $|x\rangle$ in the computational basis:
+
+\begin{equation}
+    f: \{0,1\}^n \mapsto \{0,1\} \mbox{ such that } f(w)=1 \mbox{ and } f(u)=0 \mbox{ for } u \not = w 
+\end{equation}
+
+We assume that we can implement this oracle as a quantum oracle.
+
+Specifically, consider the unitary linear transformation of dimension $(n,n)$: 
+
+\begin{equation}
+  U_w = I - 2|w><w|  
+\end{equation}
+
+where $|w>$ is the ket vector corresponding to the object $w$. Then, it will act on any ket thusly:
+
+$$
+U_\omega|x\rangle = \bigg\{
+\begin{aligned}
+\phantom{-}|x\rangle \quad \text{if} \; x \neq \omega \\
+-|x\rangle \quad \text{if} \; x = \omega \\
+\end{aligned}
+$$
+
+
+This oracle will be a diagonal matrix, where the entry that correspond to the marked item will have a negative phase. For example, if we have three qubits and $\omega = |101\rangle$, our oracle will have the matrix:
+
+$$
+U_\omega = 
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+\end{bmatrix}
+\begin{aligned}
+\\
+\\
+\\
+\\
+\\
+\\
+\leftarrow \omega = \text{101}\\
+\\
+\\
+\\
+\end{aligned}
+$$
+
+We show this via direct computation. First, the outer product $|w>$$<w|$ is: $|101>$$<101|$ or 
+
+$\begin{bmatrix}
+0\\
+0\\
+0\\
+0 \\
+0 \\
+1 \\
+0 \\
+0 \\
+\end{bmatrix} * 
+\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix}$ Then, multiplying by -2, we have $=
+\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -2 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix}$
+
+Finally, we add this matrix to our identity matrix=
+
+$\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+\end{bmatrix}
++
+\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -2 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix} \Rightarrow \begin{equation}U_w =\end{equation}
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+\end{bmatrix}$
+
+There are many computational problems in which it’s difficult to _find_ a solution, but relatively easy to _verify_ a solution. For these problems, we can create a function $f$ that takes a proposed solution $x$, and returns $f(x) = 0$ if $x$ is not a solution ($x \neq \omega$) and $f(x) = 1$ for a valid solution ($x = \omega$). Our oracle can then be described as:
+
+$$
+U_\omega|x\rangle = (-1)^{f(x)}|x\rangle
+$$
+
+and the oracle's matrix will be a diagonal matrix of the form:
+
+$$
+U_\omega = 
+\begin{bmatrix}
+(-1)^{f(0)} &   0         & \cdots &   0         \\
+0           & (-1)^{f(1)} & \cdots &   0         \\
+\vdots      &   0         & \ddots & \vdots      \\
+0           &   0         & \cdots & (-1)^{f(2^n-1)} \\
+\end{bmatrix}
+$$
+
+Two things to verify are that <b>$U_w|w> = -|w>$</b> and <b>$U_w|x>=|x>$</b> for $|x>$, any of the $n$ vectors of the basis of $\mathbb{C}^n$, with $x \not = w$.
+
+<u>We verify that</u>
+$U_w|w> = -|w>$ 
+$$\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+\end{bmatrix} *\begin{bmatrix}
+0\\
+0\\
+0\\
+0 \\
+0 \\
+1 \\
+0 \\
+0 \\
+\end{bmatrix} 
+=
+\begin{bmatrix}
+0\\
+0\\
+0\\
+0 \\
+0 \\
+-1 \\
+0 \\
+0 \\
+\end{bmatrix}$$
+
+
+**and** 
+
+$U_w|x>=|x>$ for $|x>$ where $|x>$ is another ket in the database, say $|001>$:
+$$\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+\end{bmatrix} *\begin{bmatrix}
+0\\
+1\\
+0\\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+\end{bmatrix} 
+=
+\begin{bmatrix}
+0\\
+1\\
+0\\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+\end{bmatrix}$$
+
+Thus, for an arbitrary ket $|y>$, the component of $|y>$ in the direction $|w>$ is reversed, while the components of $|y>$ in all the directions orthogonal to $w$ are unchanged. Effectively, this corresponds to a reflection of $|y>$ around the vector $|y-w>$.  
 
 
 [here](https://wucrypto-project.netlify.app/).
