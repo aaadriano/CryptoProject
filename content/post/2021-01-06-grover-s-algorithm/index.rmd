@@ -7,17 +7,17 @@ date: '2021-01-06'
 <img src="https://spectrum.ieee.org/image/MzEwMTk5OA.jpeg">
 </center>
 ```{r}
-library("reticulate")
-library("Rcpp")
-py_install("r-reticulate", "qiskit")
-py_install("qiskit")
+#library("reticulate")
+#library("Rcpp")
+#py_install("r-reticulate", "qiskit")
+#py_install("qiskit")
 ```
 
 ```{python}
 #Setup
-import qiskit as qk
-from qiskit import IBMQ
-IBMQ.save_account('ee9c9da0c83a6c001e34e8e124afbceb074dedb0e93b4fb8995b0bbce8a75a2eb47538c95204f2a43923abf260a79e72d9bba4b279ffc5950e39396804f43984')
+#import qiskit as qk
+#from qiskit import IBMQ
+#IBMQ.save_account('ee9c9da0c83a6c001e34e8e124afbceb074dedb0e93b4fb8995b0bbce8a75a2eb47538c95204f2a43923abf260a79e72d9bba4b279ffc5950e39396804f43984')
 ```
 
 
@@ -25,30 +25,30 @@ The **Grover Algorithm** is a search function which returns "True" for one of it
 
 Grover's algorithm was designed to speed up an unstructured database search quadratically. It is comprised of Hadamard gates, an oracle, controlled-Z gates, and a reflection. We will discuss each of these pieces in turn. First, here is a visual representation of the Grover circuit:
 ```{python}
-from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit
-from numpy import pi
-
-qreg_q = QuantumRegister(2, 'q')
-creg_c = ClassicalRegister(2, 'c')
-circuit = QuantumCircuit(qreg_q, creg_c)
-
-circuit.reset(qreg_q[0])
-circuit.reset(qreg_q[1])
-circuit.h(qreg_q[1])
-circuit.h(qreg_q[0])
-circuit.cz(qreg_q[0], qreg_q[1])
-circuit.h(qreg_q[1])
-circuit.h(qreg_q[0])
-circuit.x(qreg_q[0])
-circuit.x(qreg_q[1])
-circuit.cz(qreg_q[0], qreg_q[1])
-circuit.x(qreg_q[0])
-circuit.x(qreg_q[1])
-circuit.h(qreg_q[0])
-circuit.h(qreg_q[1])
-circuit.measure(qreg_q[0], creg_c[0])
-circuit.measure(qreg_q[1], creg_c[1])
-print (circuit)
+# from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit
+# from numpy import pi
+# 
+# qreg_q = QuantumRegister(2, 'q')
+# creg_c = ClassicalRegister(2, 'c')
+# circuit = QuantumCircuit(qreg_q, creg_c)
+# 
+# circuit.reset(qreg_q[0])
+# circuit.reset(qreg_q[1])
+# circuit.h(qreg_q[1])
+# circuit.h(qreg_q[0])
+# circuit.cz(qreg_q[0], qreg_q[1])
+# circuit.h(qreg_q[1])
+# circuit.h(qreg_q[0])
+# circuit.x(qreg_q[0])
+# circuit.x(qreg_q[1])
+# circuit.cz(qreg_q[0], qreg_q[1])
+# circuit.x(qreg_q[0])
+# circuit.x(qreg_q[1])
+# circuit.h(qreg_q[0])
+# circuit.h(qreg_q[1])
+# circuit.measure(qreg_q[0], creg_c[0])
+# circuit.measure(qreg_q[1], creg_c[1])
+# print (circuit)
 ```
 
 *How does the seach work?*
