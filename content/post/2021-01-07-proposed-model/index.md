@@ -2,6 +2,15 @@
 title: Proposed Model
 author: ''
 date: '2021-01-23'
+categories: []
+tags: []
+Categories:
+  - Development
+  - GoLang
+Description: ''
+Tags:
+  - Development
+  - golang
 ---
 
 <center>
