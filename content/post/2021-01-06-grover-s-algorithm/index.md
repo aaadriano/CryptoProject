@@ -13,7 +13,7 @@ Tags:
 ---
 <center>
 </br>
-<img src="https://spectrum.ieee.org/image/MzEwMTk5OA.jpeg">
+<img src="https://www.udacity.com/blog/wp-content/uploads/2020/07/Search-Algorithms_Blog-scaled.jpeg">
 </center>
 
 The **Grover Algorithm** is a search function which returns "True" for one of its possible inputs, and "False" for all the others; its purpose is to find any object in the database that would return "True". Grover's algorithm has a lot of applications, and can be used for estimating the mean and median of a set of numbers, and for solving the collision problem. In addition, it can be used to perform exhaustive searches over the set of possible solution. It is the fastest possible quantum algorithm for searching an unsorted database.
@@ -209,4 +209,4 @@ $\theta$ $\approx$ $\frac{1}{\sqrt{N-1}}$
 ****
 Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project [here](https://wucrypto-project.netlify.app/).
 
-*Image from Spectrum.ieee*
+*Image from udacity.com*
