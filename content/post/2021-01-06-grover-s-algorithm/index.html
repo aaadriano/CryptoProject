@@ -10,51 +10,28 @@ date: '2021-01-06'
 </br>
 <img src="https://spectrum.ieee.org/image/MzEwMTk5OA.jpeg">
 </center>
-<pre class="r"><code>#library(&quot;reticulate&quot;)
-#library(&quot;Rcpp&quot;)
-#py_install(&quot;r-reticulate&quot;, &quot;qiskit&quot;)
-#py_install(&quot;qiskit&quot;)</code></pre>
-<pre class="python"><code>#Setup
-#import qiskit as qk
-#from qiskit import IBMQ
-#IBMQ.save_account(&#39;ee9c9da0c83a6c001e34e8e124afbceb074dedb0e93b4fb8995b0bbce8a75a2eb47538c95204f2a43923abf260a79e72d9bba4b279ffc5950e39396804f43984&#39;)</code></pre>
 <p>The <strong>Grover Algorithm</strong> is a search function which returns “True” for one of its possible inputs, and “False” for all the others; its purpose is to find any object in the database that would return “True”. Grover’s algorithm has a lot of applications, and can be used for estimating the mean and median of a set of numbers, and for solving the collision problem. In addition, it can be used to perform exhaustive searches over the set of possible solution. It is the fastest possible quantum algorithm for searching an unsorted database.</p>
+<p><strong>Fair warning</strong>, the following bits launch into a really mathematically heavy description of how the algorithm is constructed. If this does not interest you, you probably already know enough to understand what we have done in this project. You can skip <a href="https://wucrypto-project.netlify.app/">here</a> to the proposed model.</p>
 <p>Grover’s algorithm was designed to speed up an unstructured database search quadratically. It is comprised of Hadamard gates, an oracle, controlled-Z gates, and a reflection. We will discuss each of these pieces in turn. First, here is a visual representation of the Grover circuit:</p>
-<pre class="python"><code># from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit
-# from numpy import pi
-# 
-# qreg_q = QuantumRegister(2, &#39;q&#39;)
-# creg_c = ClassicalRegister(2, &#39;c&#39;)
-# circuit = QuantumCircuit(qreg_q, creg_c)
-# 
-# circuit.reset(qreg_q[0])
-# circuit.reset(qreg_q[1])
-# circuit.h(qreg_q[1])
-# circuit.h(qreg_q[0])
-# circuit.cz(qreg_q[0], qreg_q[1])
-# circuit.h(qreg_q[1])
-# circuit.h(qreg_q[0])
-# circuit.x(qreg_q[0])
-# circuit.x(qreg_q[1])
-# circuit.cz(qreg_q[0], qreg_q[1])
-# circuit.x(qreg_q[0])
-# circuit.x(qreg_q[1])
-# circuit.h(qreg_q[0])
-# circuit.h(qreg_q[1])
-# circuit.measure(qreg_q[0], creg_c[0])
-# circuit.measure(qreg_q[1], creg_c[1])
-# print (circuit)</code></pre>
-<p><em>How does the seach work?</em>
+<center>
+</br>
+<img src="https://qiskit.org/textbook/ch-algorithms/images/grover_circuit_3qubits.png">
+</center>
+<p><em>How does the search work?</em>
+</br>
 Suppose you are given a large list of <span class="math inline">\(N\)</span> items. Among these items there is one item with a unique property that we wish to locate called <span class="math inline">\(w\)</span>. In general, <i>n</i> qubits are represented by a superposition state vector in <span class="math inline">\(2^{n}\)</span> dimensional Hilbert space, so our database contains <span class="math inline">\(N=2^n\)</span> items, which is dependent on the number of qubits.</p>
 <p>In classical computation, the search (on average) would require checking <span class="math inline">\(N/2\)</span> items, and at worst all <span class="math inline">\(N\)</span> items. On a quantum computer, however, we can find the marked item in roughly <span class="math inline">\(\sqrt{N}\)</span> steps with Grover’s algorithm, which is a significant improvement to computational efficiency. Since the algorithm does not depend on the structure of the database itself, it can be used more generically.</p>
-<p><em>The Hadamrad Gate</em>
+<p><em>The Hadamard Gate</em>
+</br>
 The <b>Hadamard gate</b> is a single-qubit operation that creates an uniform superposition of the two basis states (a measurement of an output state will return 1 or 0 with equal probabilities).</p>
 <p>In coordinates, the Hadamard gate applies the <i>Hadamard Matrix</i> to a coordinatized qubit:
 <span class="math display">\[H=\frac{1}{\sqrt{2}}\begin{bmatrix}1 &amp; 1\\1 &amp; -1\end{bmatrix}\]</span></p>
 <p>For example, maps the observational basis state |0⟩ to the superimposed state <span class="math inline">\(\frac{|0\rangle+|1\rangle}{\sqrt{2}}\)</span> and |1⟩ to <span class="math inline">\(\frac{|0\rangle-|1\rangle}{\sqrt{2}}\)</span></p>
 <p>The Hadamard gate can also be considered geometrically as a 90º rotation of the Bloch Sphere about the Y-axis, followed by a 180º rotation about the X-axis.</p>
-<p><i>Advanced Note</i>: The Hadamard gate is the lowest dimensional case (one-qubit) of the quantum Fourier transform.</p>
-<p><em>The Oracle</em>
+<p><i>Advanced Note</i>: The Hadamard gate is the lowest dimensional case (one-qubit) of the quantum Fourier transform.
+</br>
+<em>The Oracle</em>
+</br>
 For this example, consider the database to be all the possible computational basis states our qubits can be in.
 If we have 3 qubits, the states would run from <span class="math inline">\(|000\rangle, |001\rangle, \dots |111\rangle\)</span>.</p>
 <p>Grover’s algorithm involves oracles that add a negative phase to the solution states. I.e. for any state <span class="math inline">\(|x\rangle\)</span> in the computational basis:</p>
@@ -100,10 +77,6 @@ U_\omega =
 \\
 \end{aligned}
 \]</span></p>
-<p>We show this via direct computation. First, the outer product <span class="math inline">\(|w&gt;\)</span><span class="math inline">\(&lt;w|\)</span> is: <span class="math inline">\(|101&gt;\)</span><span class="math inline">\(&lt;101|\)</span> or</p>
-<p><span class="math inline">\(\begin{bmatrix} 0\\ 0\\ 0\\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ \end{bmatrix} * \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ \end{bmatrix} = \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ \end{bmatrix}\)</span> Then, multiplying by -2, we have <span class="math inline">\(= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -2 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ \end{bmatrix}\)</span></p>
-<p>Finally, we add this matrix to our identity matrix=</p>
-<p><span class="math inline">\(\begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\ \end{bmatrix} + \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -2 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ \end{bmatrix} \Rightarrow \begin{equation}U_w =\end{equation} \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\ \end{bmatrix}\)</span></p>
 <p>There are many computational problems in which it’s difficult to <em>find</em> a solution, but relatively easy to <em>verify</em> a solution. For these problems, we can create a function <span class="math inline">\(f\)</span> that takes a proposed solution <span class="math inline">\(x\)</span>, and returns <span class="math inline">\(f(x) = 0\)</span> if <span class="math inline">\(x\)</span> is not a solution (<span class="math inline">\(x \neq \omega\)</span>) and <span class="math inline">\(f(x) = 1\)</span> for a valid solution (<span class="math inline">\(x = \omega\)</span>). Our oracle can then be described as:</p>
 <p><span class="math display">\[
 U_\omega|x\rangle = (-1)^{f(x)}|x\rangle
@@ -118,71 +91,61 @@ U_\omega =
 0           &amp;   0         &amp; \cdots &amp; (-1)^{f(2^n-1)} \\
 \end{bmatrix}
 \]</span></p>
-<p>Two things to verify are that <b><span class="math inline">\(U_w|w&gt; = -|w&gt;\)</span></b> and <b><span class="math inline">\(U_w|x&gt;=|x&gt;\)</span></b> for <span class="math inline">\(|x&gt;\)</span>, any of the <span class="math inline">\(n\)</span> vectors of the basis of <span class="math inline">\(\mathbb{C}^n\)</span>, with <span class="math inline">\(x \not = w\)</span>.</p>
-<p><u>We verify that</u>
-<span class="math inline">\(U_w|w&gt; = -|w&gt;\)</span>
-<span class="math display">\[\begin{bmatrix}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
-\end{bmatrix} *\begin{bmatrix}
-0\\
-0\\
-0\\
-0 \\
-0 \\
-1 \\
-0 \\
-0 \\
-\end{bmatrix} 
-=
-\begin{bmatrix}
-0\\
-0\\
-0\\
-0 \\
-0 \\
--1 \\
-0 \\
-0 \\
-\end{bmatrix}\]</span></p>
-<p><strong>and</strong></p>
-<p><span class="math inline">\(U_w|x&gt;=|x&gt;\)</span> for <span class="math inline">\(|x&gt;\)</span> where <span class="math inline">\(|x&gt;\)</span> is another ket in the database, say <span class="math inline">\(|001&gt;\)</span>:
-<span class="math display">\[\begin{bmatrix}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
-\end{bmatrix} *\begin{bmatrix}
-0\\
-1\\
-0\\
-0 \\
-0 \\
-0 \\
-0 \\
-0 \\
-\end{bmatrix} 
-=
-\begin{bmatrix}
-0\\
-1\\
-0\\
-0 \\
-0 \\
-0 \\
-0 \\
-0 \\
-\end{bmatrix}\]</span></p>
 <p>Thus, for an arbitrary ket <span class="math inline">\(|y&gt;\)</span>, the component of <span class="math inline">\(|y&gt;\)</span> in the direction <span class="math inline">\(|w&gt;\)</span> is reversed, while the components of <span class="math inline">\(|y&gt;\)</span> in all the directions orthogonal to <span class="math inline">\(w\)</span> are unchanged. Effectively, this corresponds to a reflection of <span class="math inline">\(|y&gt;\)</span> around the vector <span class="math inline">\(|y-w&gt;\)</span>.</p>
-<p><a href="https://wucrypto-project.netlify.app/">here</a>.</p>
+<p><em>Defintion: Amplitude</em>
+</br>
+When we start running the algorithm, we do not know which item in <span class="math inline">\(N\)</span> is <span class="math inline">\(w\)</span>, and any random guess would have the same probability of success. We call this a uniform superposition: <span class="math inline">\(|s \rangle = \frac{1}{\sqrt{N}} \sum_{x = 0}^{N -1} | x \rangle.\)</span></p>
+<p>Note that for any <span class="math inline">\(|y&gt;\)</span>, one of the <span class="math inline">\(n\)</span> vectors of the basis of <span class="math inline">\(\mathbb{C}^n\)</span>
+<span class="math display">\[\begin{equation}
+    &lt;y|s&gt;=\frac{1}{\sqrt{N}}\sum_{x=0}^{N-1}&lt;y|x&gt;=\frac{1}{\sqrt{N}}
+\end{equation}\]</span>
+Thus, if we make a measurement of <span class="math inline">\(s\)</span>, all the possible outcome <span class="math inline">\(y\)</span> are equally likely, with probability <span class="math inline">\(|&lt;y|s&gt;|^2=\frac{1}{N}\)</span>.</p>
+<p>If at this point we were to measure in the standard basis <span class="math inline">\(\{ | x \rangle \}\)</span>, this superposition would return to any one of the basis states with the same probability of <span class="math inline">\(\frac{1}{N} = \frac{1}{2^n}\)</span>. Our chances of guessing the right value <span class="math inline">\(w\)</span> is therefore <span class="math inline">\(1\)</span> in <span class="math inline">\(2^n\)</span>, as could be expected. Hence, on average we would need to try about <span class="math inline">\(N/2 = 2^{n-1}\)</span> times to guess the correct item.</p>
+<p>Through amplitude amplification, a quantum computer significantly enhances this probability. This procedure stretches out (amplifies) the amplitude of the marked item, which shrinks the other items’ amplitude, so that measuring the final state will return the right item with near-certainty.</p>
+<p>We can think of amplification in a geometric sense- two reflections generate a rotation in a two-dimensional plane. The only two special states we need to consider are <span class="math inline">\(| w \rangle\)</span> and the uniform superposition <span class="math inline">\(| s \rangle\)</span>. These two vectors span a two-dimensional plane in the vector space <span class="math inline">\(\mathbb{C}^N.\)</span> They are not perpendicular because <span class="math inline">\(| w \rangle\)</span> occurs in the superposition with amplitude <span class="math inline">\(N^{-1/2}\)</span> as well.
+We can, however, introduce an additional state <span class="math inline">\(|s&#39;\rangle\)</span> that is in the span of these two vectors, which is perpendicular to <span class="math inline">\(| w \rangle\)</span> and is obtained from <span class="math inline">\(|s \rangle\)</span> by removing <span class="math inline">\(| w \rangle\)</span> and
+rescaling.</p>
+<p>As mentioned above, the probability of finding <span class="math inline">\(| w \rangle\)</span> is only <span class="math inline">\(\frac{1}{N}\)</span>. Then, the probability of finding <span class="math inline">\(| s&#39; \rangle\)</span> is an equal probability of any value from N-1. P(<span class="math inline">\(| s&#39; \rangle\)</span>)= <span class="math inline">\(\frac{N-1}{N}\)</span>.</p>
+<p>Let’s put it together.</p>
+<p><u><em>Step By Step Grover</em></u>
+Start with <span class="math inline">\(|x_0&gt;=|s&gt;\)</span>, and at each step <span class="math inline">\(t\)</span>, compute</p>
+<p><span class="math display">\[\begin{equation}
+    |x_t&gt;= U_s U_w |x_{t-1}&gt;
+\end{equation}\]</span></p>
+<p>The key is to compute the angle <span class="math inline">\(\alpha_t\)</span> between <span class="math inline">\(|x_t&gt;\)</span> and <span class="math inline">\(|w&gt;\)</span>. For convenience, notate <span class="math inline">\(\theta_t=\frac{\pi}{2}-\alpha_t\)</span>, the angle between <span class="math inline">\(|x_t&gt;\)</span> and <span class="math inline">\(w^{\perp}\)</span>. First, notice that</p>
+<p><span class="math display">\[\begin{equation}
+|&lt;w|x_0&gt;| = |&lt;w|s&gt;|=\frac{1}{\sqrt{N}}=\cos \alpha_0=\sin \theta_0    
+\end{equation}\]</span></p>
+<p>since <span class="math inline">\(N\)</span> is large, we approximate</p>
+<p><span class="math display">\[\begin{equation}
+\frac{1}{\sqrt{N}}=\sin(\theta_0) \approx \theta_0   
+\end{equation}\]</span></p>
+<p>Next, let us proceed geometrically. First we compute <span class="math inline">\(U_w |x_0&gt;\)</span> which rotate <span class="math inline">\(x_0\)</span>
+around <span class="math inline">\(|x_0-w&gt;\)</span>. Next, we rotate this vector around <span class="math inline">\(s\)</span> by the action of <span class="math inline">\(U_s\)</span>. Overall,</p>
+<p><span class="math display">\[\begin{equation}
+    \theta_1=\theta_0+2\theta_0
+\end{equation}\]</span></p>
+<p>and after <span class="math inline">\(T\)</span> steps,</p>
+<p><span class="math display">\[\begin{equation}
+    \theta_t = \theta_0 + 2T \theta_0 \approx \frac{1}{\sqrt{N}}(1 + 2T)
+\end{equation}\]</span></p>
+<p><img src="https://miro.medium.com/max/1020/1*GArCJX_Jx8b1U3F68GYibg.png" /></p>
+<p>A visual representation of the amplitude change between the inversion and final step:
+<img src="https://www.researchgate.net/publication/274056986/figure/fig2/AS:393378433912833@1470800135225/Single-call-of-the-Grover-iteration-on-the-equal-superposition-state-Grover.png" /></p>
+<p>The equation <span class="math inline">\(\theta_T=\frac{\pi}{2}\)</span> provides a method for choosing the number of steps,<br />
+<span class="math display">\[\begin{equation}
+T=\frac{\pi}{4}\sqrt{N} - \frac{1}{2} \approx \sqrt{N}    
+\end{equation}\]</span></p>
+<p>The probability of guessing correctly the oracle after <span class="math inline">\(t\)</span> steps is</p>
+<p><span class="math display">\[\begin{equation}
+    |&lt;x_t,w&gt;|^2=\sin^2(\theta_t)=\sin^2(\frac{1}{\sqrt{N}}(1+2t))
+\end{equation}\]</span></p>
+<p>It is cautioned not to run too many iterations, otherwise the algorithms ability to pick out the desired values begins to diminish again.</p>
+<p><em>A note on recovering <span class="math inline">\(\theta\)</span> the simplest way possible:</em></p>
+<p>tan(<span class="math inline">\(\theta\)</span>) = <span class="math inline">\(\frac{1}{\sqrt{N}}\)</span> <span class="math inline">\(\div\)</span> <span class="math inline">\(\frac{\sqrt{N-1}}{\sqrt{N}}\)</span>
+= 1 <span class="math inline">\(\div \sqrt{N-1}\)</span> <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(tan^{-1}\)</span>(<span class="math inline">\(\frac{1}{\sqrt{N-1}})\)</span> = <span class="math inline">\(\theta\)</span></p>
+<p></br></p>
+<p><span class="math inline">\(\theta\)</span> <span class="math inline">\(\approx\)</span> <span class="math inline">\(\frac{1}{\sqrt{N-1}}\)</span></p>
+<hr />
+<p>Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project <a href="https://wucrypto-project.netlify.app/">here</a>.</p>
 <p><em>Image from Spectrum.ieee</em></p>
