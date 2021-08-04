@@ -2,5 +2,9 @@
 date: "2016-05-05T21:48:51-07:00"
 title: About
 ---
+<center>
+</br>
+<img src="https://media-exp1.licdn.com/dms/image/C5603AQFF_-RR332hgA/profile-displayphoto-shrink_800_800/0/1516696419558?e=1633564800&v=beta&t=kXHjsPriw9BRUPeuFD02oiHA8c_FJYFZILucknUtsec">
+</center>
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium).
+*Anastasia Adriano* is a Ph.D. in Mathematics student at Portland State University, studying quantum machine learning algorithms for financial markets. She completed her Master's in Data Science at Willamette University in August of 2021. This website was designed as a channel for her to bring her varied backgrounds together towards one, cohesive goal while utilizing her passion for research, statistical interpretation, and algorithm development.
