@@ -14,7 +14,24 @@ Understanding how Bitcoin and other cryptocurrencies work is important since the
 In general, previous research has shown that methods for the prediction of cryptocurrency return from poor performance. Cryptocurrency returns are very evidently non-normal, but there is no distribution to jointly fit all the cryptocurrencies– this fact presents a challenge to aspiring forecasters, and often requires different distributions to be imposed on specific currencies during periods of specific market conditions.
 Here is a list of the most popular cryptocurrencies and their most recent price:
 
-[Insert Crypto table]
+| Ticker | Currency     |Price (USD$) |
+|--------|--------------|-------------|
+| ADA    | Cardano      |$1.39 |
+| BCH    | Bitcoin Cash |$547.65|
+| BTC    | Bitcoin      |$39,766.64|
+| DOGE   | Dogecoin     |$0.20|
+| DOT    | Polkadot     |$19.31|
+| ETH    | Ethereum     |$2,713.74|
+| IOTA   | IOTA         |$0.88|
+| LINK   | Chainlink    |$24.36|
+| LTC    | Litecoin     |$144.01|
+| TRX    | Tron         |$0.06|
+| USDT   | Tether       |$0.99|
+| XLM    | Stellar      |$0.28|
+| XMR    | Monero       |$236.71|
+| XRP    | Ripple       |$0.73|
+| ZEC    | Zcash        |$119.75|
+*Last Updated 08/08/2021 @ 1:30pm EST
 
 Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://wucrypto-project.netlify.app/).
 
