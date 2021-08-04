@@ -1,6 +1,6 @@
 ---
 title: Cryptocurrency
-date: '2021-01-02'
+date: '2021-01-30'
 ---
 <center>
 </br>
@@ -31,6 +31,7 @@ Here is a list of the most popular cryptocurrencies and their most recent price:
 | XMR    | Monero       |$236.71|
 | XRP    | Ripple       |$0.73|
 | ZEC    | Zcash        |$119.75|
+
 *Last Updated 08/08/2021 @ 1:30pm EST
 
 Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://wucrypto-project.netlify.app/).

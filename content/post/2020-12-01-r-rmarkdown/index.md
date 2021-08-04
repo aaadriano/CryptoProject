@@ -1,6 +1,6 @@
 ---
 title: "Quantum Finance"
-date: 2021-01-04
+date: 2021-01-28
 ---
 <center>
 </br>

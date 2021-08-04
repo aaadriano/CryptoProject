@@ -1,6 +1,6 @@
 ---
 title: Grover's Algorithm
-date: '2021-01-06'
+date: '2021-01-26'
 ---
 <center>
 </br>

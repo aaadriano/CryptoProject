@@ -1,6 +1,6 @@
 ---
 title: Cryptocurrency Mining
-date: '2021-01-05'
+date: '2021-01-27'
 ---
 <center>
 </br>
