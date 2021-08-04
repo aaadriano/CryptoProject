@@ -1,0 +1,25 @@
+---
+title: Proposed Model
+author: ''
+date: '2021-01-07'
+slug: proposed-model
+categories: []
+tags: []
+Categories:
+  - Development
+  - GoLang
+Description: ''
+Tags:
+  - Development
+  - golang
+menu: main
+---
+
+<center>
+</br>
+<img src="https://www.investopedia.com/thmb/EohZb8zaG8TvKMEGzP7l2zj1LmA=/700x394/smart/filters:no_upscale()/cryptocurrency_mining_farm-5bfd7ab046e0fb0083fd38c2">
+</center>
+
+Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project [here](https://wucrypto-project.netlify.app/).
+
+*Image from Spectrum.ieee*
