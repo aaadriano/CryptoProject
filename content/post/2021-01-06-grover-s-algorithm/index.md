@@ -1,6 +1,15 @@
 ---
 title: Grover's Algorithm
 date: '2021-01-26'
+categories: []
+tags: []
+Categories:
+  - Development
+  - GoLang
+Description: ''
+Tags:
+  - Development
+  - golang
 ---
 <center>
 </br>
