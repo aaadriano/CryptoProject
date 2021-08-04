@@ -27,7 +27,7 @@ For each position of the 64, there are 16 possibilities: 0 though 9 and a, b, c,
 
 How many combinations is that? Well, you have probability $\frac{1}{16}$ of randomly guessing the first digit correctly. You have a  $\frac{1}{16}$*$\frac{1}{16}$=$\frac{1}{256}$ chance of guessing the first and second digits correctly. From here, we infer that our chances of guessing every digit correctly is $\frac{1}{16^{48}}$, which is a massive, massive number that I am not sure what we can call. For a your typical home computer to find this number, it would take would take thousands of years to mine a new block alone. 
 
-Now, imagine that we can try 0-f on our first digit at the same time. That would require a quentum computer that 
+Now, imagine that we can try 0-f on our first digit at the same time. That would require a quantum computer that could consider
 
 Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project [here](https://wucrypto-project.netlify.app/).
 
