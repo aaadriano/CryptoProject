@@ -1,5 +1,5 @@
 ---
-title: Proposed Model
+title: Quantum Mining Model
 author: ''
 date: '2021-01-23'
 categories: []
