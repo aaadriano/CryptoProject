@@ -4,6 +4,11 @@ author: ''
 date: '2021-01-22'
 ---
 
+<center>
+</br>
+<img src="https://www.schwab.com/resource-center/insights/sites/g/files/eyrktu156/files/orange-bar-chart-960x537_3.jpg">
+</center>
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, include=FALSE}
 library(tidyverse)
 library(dplyr)
@@ -192,4 +197,6 @@ This totals 8 transactions (4 each of Buy/Sell). Of these 8 transactions, the mo
 
 **Warning** The MA made money because it did not have to account for a sign change in the slope. If the market turned and Bitcoin prices declined while the algorithm was running, the MA model would have lost money. In order to be a safe way to make money, there has to be a built-in trigger. If the slope has changed sign for three consecutive measurements, we would instead buy when the difference was negative and sell when the difference turned positive.
 
-********
+Learn more about how you can acquire cryptocurrency without purchasing it [here](https://wucrypto-project.netlify.app/) or how quantum computers can help miners work more efficiently [here](https://wucrypto-project.netlify.app/).
+
+*Image from schwab.com*
