@@ -1,7 +1,7 @@
 baseurl: /
 languageCode: en-us
 title: The Modern Investor- Cryptocurrency and Quantum Computing
-theme: hugo-lithium
+theme: hyde
 googleAnalytics: ''
 disqusShortname: ''
 ignoreFiles:
