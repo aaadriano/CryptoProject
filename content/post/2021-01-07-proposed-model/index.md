@@ -1,7 +1,7 @@
 ---
 title: Proposed Model
 author: ''
-date: '2021-01-07'
+date: '2021-01-23'
 slug: proposed-model
 categories: []
 tags: []
