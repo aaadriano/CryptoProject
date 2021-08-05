@@ -102,6 +102,7 @@ autoplot(Crypto.ts) +
 We can measure to see how well these models performed in comparison against the actual value and against each other using the MAPE, or mean absolute percentage error. We want the lowest error values, so the "drift" forecast seems to be the best. However, these are not good estimates, and we expect to outperform them even with simple time series models.
 
 |**Average Method**|  MAPE|
+|-------------|--------------|
 |Training set | 17.88|
 |Test set     | 29.67|
 |**Naïve Method**|  |

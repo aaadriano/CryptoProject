@@ -46,15 +46,48 @@ where <span class="math inline">\(x_T\)</span> is the final observation, <span c
 <p>This is what they look like when applied to Etherium.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>We can measure to see how well these models performed in comparison against the actual value and against each other using the MAPE, or mean absolute percentage error. We want the lowest error values, so the “drift” forecast seems to be the best. However, these are not good estimates, and we expect to outperform them even with simple time series models.</p>
-<p>|<strong>Average Method</strong>| MAPE|
-|Training set | 17.88|
-|Test set | 29.67|
-|<strong>Naïve Method</strong>| |
-|Training set | 4.70|
-|Test set | 29.67|
-|<strong>Drift Method</strong>| |
-|Training set | 4.59|
-|Test set | 6.01|</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Average Method</strong></th>
+<th>MAPE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Training set</td>
+<td>17.88</td>
+</tr>
+<tr class="even">
+<td>Test set</td>
+<td>29.67</td>
+</tr>
+<tr class="odd">
+<td><strong>Naïve Method</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Training set</td>
+<td>4.70</td>
+</tr>
+<tr class="odd">
+<td>Test set</td>
+<td>29.67</td>
+</tr>
+<tr class="even">
+<td><strong>Drift Method</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Training set</td>
+<td>4.59</td>
+</tr>
+<tr class="even">
+<td>Test set</td>
+<td>6.01</td>
+</tr>
+</tbody>
+</table>
 <div id="identity-crisis-what-am-i" class="section level2">
 <h2>Identity Crisis: What am I?</h2>
 <p>We can tackle questions (1) &amp; (3) from above (what kind of growth is this?, what is the slope?) fairly quickly by fitting a few models and finding the best <span class="math inline">\(R^2\)</span> value. We ask this question because the rate of change for the price variable can help us determine which predictive models would be most effective.</p>
