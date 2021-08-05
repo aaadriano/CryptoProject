@@ -1,7 +1,7 @@
 ---
 title: Market Analysis
 author: ''
-date: '2021-01-22'
+date: '2021-01-23'
 ---
 
 <center>
@@ -27,7 +27,8 @@ Crypto <- read.csv("crypto.csv")
 Crypto$Date <- as.Date(Crypto$Date, "%m/%d/%Y")
 Crypto <- as_tsibble(Crypto, key = Currency)
 ```
-Data: All data gathered from https://www.coindesk.com/price/ (updated: 08/04/2021). Variables of interest are Currency, Date, Closing Price, the 24h High, and the 24h Low.
+Data: All data gathered from https://www.coindesk.com/price/ (updated: 08/04/2021). 
+Variables of interest are Currency, Date, Closing Price, the 24h High, and the 24h Low.
 
 In current conditions, Bitcoin is so comparatively expensive that it is hard to gauge the other currencies. As a result, it won't be included in the following price chart.
 
@@ -41,7 +42,10 @@ ggplot(aes(x = Date, y = ClosingPrice, color=Currency)) + geom_line() +
   xlab("Date") + ylab("Price")
 ```
 
-Visually, we notice that after a slump over the last two years, cryptocurrency is again regaining popularity very quickly. The questions are (1) how quickly?, (2) for how long?, and (3) with which type of growth (we see a steep curve, but is it... Quadratic? Exponential? Polynomial?)? Is now a good time to be investing in or mining cryptocurrency?
+Visually, we notice that after a slump over the last two years, cryptocurrency is again regaining popularity very quickly. The questions are: 
+(1) how quickly?
+(2) for how long?
+and (3) with which type of growth (we see a steep curve, but is it... Quadratic? Exponential? Polynomial?)? Is now a good time to be investing in or mining cryptocurrency?
 
 Most human activities have some sort of seasonality. However, it can be inconsistent when it comes to the stock market. 
 
@@ -60,12 +64,14 @@ AM = $\frac{\Sigma^{T}_{t=1} x_{t}}{T}$
 </br>
 where $x_t$ is the observation at a given time *t* and *T* is the total number of observations
 </br>
+
 2. Naïve method, also know as the value for the most recent observation, expressed as
 </br>
 NM = $x_{T}$ 
 </br>
 where $x_T$ is the final observation
 </br>
+
 & 3. Drift method, dependent on the average slope between the first and final observations, expressed as
 </br>
 DM = $x_T + h(\frac{x_T-x_1}{T-1})$ 
@@ -95,16 +101,13 @@ autoplot(Crypto.ts) +
 
 We can measure to see how well these models performed in comparison against the actual value and against each other using the MAPE, or mean absolute percentage error. We want the lowest error values, so the "drift" forecast seems to be the best. However, these are not good estimates, and we expect to outperform them even with simple time series models.
 
-|Average Method|  MAPE|
-|:------------|--------:|
+|**Average Method**|  MAPE|
 |Training set | 17.88|
 |Test set     | 29.67|
-|Naïve Method|  |
-|:------------|--------:|
+|**Naïve Method**|  |
 |Training set | 4.70|
 |Test set     | 29.67|
-|Drift Method|  |
-|:------------|--------:|
+|**Drift Method**|  |
 |Training set | 4.59|
 |Test set     | 6.01|
 
@@ -195,8 +198,9 @@ This totals 8 transactions (4 each of Buy/Sell). Of these 8 transactions, the mo
 
 **In Sum:** If this (a most simplistic forecasting model) can make money, imagine what we could do with a more complex model (or even better, multiple aggregated complex models). Given current market conditions, this MA model outperforms even Simple Exponential Smoothing (SES) or Autoregressive Integrated Moving Average (ARIMA) models. Overall, it looks like we are expecting an upward trend for cryptocurrency for a little while longer. Good Luck!
 
-**Warning** The MA made money because it did not have to account for a sign change in the slope. If the market turned and Bitcoin prices declined while the algorithm was running, the MA model would have lost money. In order to be a safe way to make money, there has to be a built-in trigger. If the slope has changed sign for three consecutive measurements, we would instead buy when the difference was negative and sell when the difference turned positive.
+**Warning:** 
+</br>The MA made money because it did not have to account for a sign change in the slope. If the market turned and Bitcoin prices declined while the algorithm was running, the MA model would have lost money. In order to be a safe way to make money, there has to be a built-in trigger. If the slope has changed sign for three consecutive measurements, we would instead buy when the difference was negative and sell when the difference turned positive.
 
-Learn more about how you can acquire cryptocurrency without purchasing it [here](https://wucrypto-project.netlify.app/) or how quantum computers can help miners work more efficiently [here](https://wucrypto-project.netlify.app/).
+Learn more about how you can acquire cryptocurrency without purchasing it [here](https://amoderninvestor.netlify.app/27/2021/01/) or how quantum computers can help miners work more efficiently [here](https://amoderninvestor.netlify.app/23/2021/01/).
 
 *Image from schwab.com*

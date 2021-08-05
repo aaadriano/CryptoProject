@@ -17,10 +17,10 @@ Alongside developments to computing, new ways of investing have emerged, powered
 
 This body of work pairs those two exiting innovations together, developing a framework for their mutual growth.  Results from this exploration would have applications in investment, academic, and risk management settings. While contemporaneous-type prediction models hold academic interest, trade-able results require a bit more complexity which could be achieved more easily with the aid of growing technology. Furthering the understanding of cryptocurrency would allow for greater portfolio optimization and risk diversification.
 
-- New to quantum computing? Click [here](https://wucrypto-project.netlify.app/) to learn more about what it is and how it works.
+- New to quantum computing? Click [here](https://amoderninvestor.netlify.app/29/2021/01/) to learn more about what it is and how it works.
 
-- Click [here](https://wucrypto-project.netlify.app/) to learn about cryptocurrency instead.
+- Click [here](https://amoderninvestor.netlify.app/30/2021/01/) to learn about cryptocurrency instead.
 
-- If you are comfortable with both of those, click [here](https://wucrypto-project.netlify.app/) to find out about more about this project.
+- If you are comfortable with both of those, click [here](https://amoderninvestor.netlify.app/23/2021/01/) to find out about more about this project.
 
 *Image from TechFunnel.com*

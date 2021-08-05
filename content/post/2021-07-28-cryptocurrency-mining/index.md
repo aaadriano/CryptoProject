@@ -18,6 +18,6 @@ In this way, mining depends on two factors — effort and luck.
 
 Finishing a block is not enough to earn a reward, as you must also be the *first* miner to arrive at the correct answer to the problem. The answer is called a **hash**, or a 64-digit hexadecimal number, and the “correct” hash is the one that is closest (less than or equal to) a target hash. While it seems like it’s a long series of guesswork, there are some strategies to reduce the amount of time spent looking for a correct hash. There are trillions of possible combinations for a hash, so finding an efficient machine is essential to achieving any level of success.
 
-Learn about Grover’s algorithm [here](https://wucrypto-project.netlify.app/), and its applications to cryptocurrency mining [here](https://wucrypto-project.netlify.app/).
+Learn about Grover’s Algorithm [here](https://amoderninvestor.netlify.app/26/2021/01/), and its applications to cryptocurrency mining [here](https://amoderninvestor.netlify.app/23/2021/01/).
 
 *Image from Investopedia.com*

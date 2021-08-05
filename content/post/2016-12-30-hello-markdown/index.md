@@ -10,7 +10,6 @@ title: What is Quantum Computing?
 Quantum computers were designed with the main goal of massive speedups to computational problems. Whereas the common computer (we will call this “classic”) thinks about all its inputs and outputs in terms of 1s or 0s, a quantum computer can interpret information about objects that can be 1 or 0 simultaneously. 
 
 *How?*
-
 The term “quantum” may sound like a vaguely familiar physics term when discussing things at their smallest level, and quantum computing is so-named because the computer borrows this ability of subatomic particles to exist in more than one state. To explain how this works, we need to consider two definitions: 
 
 1)	In a joint quantum system, **superposition** is a state which, in coordinates, can be expressed as a complex projective linear combination of other states. In other words, before measurement, the object has a finite chance of being in each of its possible forms. It is the act of observation that imposes a particular state onto it, because the object does not have any material properties until it is measured.
@@ -30,6 +29,6 @@ There are some other differences between classical and quantum computers, but th
 
 There is no commercially available quantum computer, as their development is long and very expensive. However, quantum technologies are available without having to build the machine yourself. IBM allows access to its computers via the [IBM Quantum Network](https://quantum-computing.ibm.com/). IBM plans to have a 1,000-qubit quantum computer in place by 2023.
 
-Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://wucrypto-project.netlify.app/).
+Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://amoderninvestor.netlify.app/23/2021/01/).
 
 *Image from LiveScience.com*

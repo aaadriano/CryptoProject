@@ -9,7 +9,7 @@ date: '2021-01-30'
 
 Cryptocurrency, to a degree, is exactly what it sounds like. It’s a form of “online money” that can be used like cash in many places, allowing you to exchange it for goods and services. It’s heavily volatile, and responds rapidly to changes in other social or economic factors. Cryptocurrency uses a technology called “blockchain”. *Blockchain* uses a spread across many computers in order to manage and record transactions. It’s known for being exceptionally secure as compared to normal methods.
 
-Understanding how Bitcoin and other cryptocurrencies work is important since they represent an asset completely embedded in a decentralized market. At the moment, there exist several thousand cryptocurrencies that constitute a multi-billion market (Hu, 2019). As of July, 2021, their total value was upwards of $1.3 trillion. Apart from profit potential, cryptocurrencies have built a following because of their promise as the “money of the future.” Cryptocurrency investing works similarly to stock market investing where an individual would go through an exchange service to purchase a token or part of one.
+Understanding how Bitcoin and other cryptocurrencies work is important since they represent an asset completely embedded in a decentralized market. At the moment, there exist several thousand cryptocurrencies that constitute a multi-billion market. As of July, 2021, their total value was upwards of $1.3 trillion. Apart from profit potential, cryptocurrencies have built a following because of their promise as the “money of the future.” Cryptocurrency investing works similarly to stock market investing where an individual would go through an exchange service to purchase a token or part of one.
 
 In general, previous research has shown that methods for the prediction of cryptocurrency return from poor performance. Cryptocurrency returns are very evidently non-normal, but there is no distribution to jointly fit all the cryptocurrencies– this fact presents a challenge to aspiring forecasters, and often requires different distributions to be imposed on specific currencies during periods of specific market conditions.
 Here is a list of the most popular cryptocurrencies and their most recent price:
@@ -34,6 +34,6 @@ Here is a list of the most popular cryptocurrencies and their most recent price:
 
 *Last Updated 08/08/2021 @ 1:30pm EST
 
-Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://wucrypto-project.netlify.app/).
+Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://amoderninvestor.netlify.app/23/2021/01/).
 
 *Image from Vectra.ai*
