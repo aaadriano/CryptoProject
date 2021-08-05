@@ -43,10 +43,9 @@ ggplot(aes(x = Date, y = ClosingPrice, color=Currency)) + geom_line() +
 ```
 
 Visually, we notice that after a slump over the last two years, cryptocurrency is again regaining popularity very quickly. The questions are: 
-(1) how quickly?
-
-(2) for how long?
-and (3) with which type of growth (we see a steep curve, but is it... Quadratic? Exponential? Polynomial?)? Is now a good time to be investing in or mining cryptocurrency?
+1) how quickly?
+2) for how long? and
+3) with which type of growth (we see a steep curve, but is it... Quadratic? Exponential? Polynomial?)? Is now a good time to be investing in or mining cryptocurrency?
 
 Most human activities have some sort of seasonality. However, it can be inconsistent when it comes to the stock market. 
 
