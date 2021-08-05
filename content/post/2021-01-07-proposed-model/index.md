@@ -2,15 +2,6 @@
 title: Quantum Mining Model
 author: ''
 date: '2021-01-22'
-categories: []
-tags: []
-Categories:
-  - Development
-  - GoLang
-Description: ''
-Tags:
-  - Development
-  - golang
 ---
 
 <center>
@@ -39,6 +30,6 @@ Another limitation is specific to Bitcoin. Because miners have become highly spe
 
 Finally, it should be mentioned that we talk about using quantum computers in a **legal** way to honestly mine cryptocurrency. There is a real danger that quantum computers will enable hackers to *steal* finished blocks from individuals with real computers. That is a different type of security problem that is outside the scope of this inquiry.
 
-What are your impressions? Read some closing thoughts on quantum computing and cryptocurrency [here](https://wucrypto-project.netlify.app/).
+What are your impressions? Read some closing thoughts on quantum computing and cryptocurrency [here](https://amoderninvestor.netlify.app/21/2021/01/).
 
 *Image from nhst.tech*

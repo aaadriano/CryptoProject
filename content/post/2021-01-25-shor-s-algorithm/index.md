@@ -11,7 +11,9 @@ date: '2021-01-25'
 
 For a long time, factoring numbers was one of the most computationally complex things you could do on a computer. Any integer can be broken down into a product of prime numbers, but finding those numbers can be very difficult. In the financial context, we see factoring problems as part of the security and encryption of data. An integer with a thousand digits (or more) is nearly impossible to factor, and it was thought to be out of reach for technology prior to 1995. 
 
-Shor's Algorithm was designed to factor integers in polynomial time, allowing for very large speed-ups. Shor took these near-impossible thousand-digit integers and proved that the factoring problem can be solved (and efficiently) by using a quantum computer.
+Shor's Algorithm was designed to factor integers in polynomial time, allowing for very large speed-ups. Shor took these near-impossible thousand-digit integers and proved that the factoring problem can be solved (and efficiently) by using a quantum computer. You can find his original paper [here](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.123.5183&rep=rep1&type=pdf).
+
+Before we discuss how Shor works, we can talk about why it is important. While it may not have been the original intent of the algorithm, it can now break encryption on connections that were designed to keep financial transactions secure. Specifically, the publication of Shor's work brought codes dependent on keys, like RSA encryption, to a highly vulnerable point. This algorithm itself helped spur the development of a quantum computer.
 
 While it is a complex function, Shor's Algorithm can be broken down into a few simpler steps. Let us consider and integer *n* that we wish to factor. These first steps can be done on a classic computer:
 
@@ -26,5 +28,7 @@ Now, we need our quantum computer. Any calculation for the appropriate number of
 4) 
 
 If we are content with this explanation of the Shor's algorithm, click [here](https://amoderninvestor.netlify.app/) to return to the main page.
+
+Just as Shor was able to break RSA encryption (which would otherwise take thousands of years) with a quantum computer, we talk about how quantum computing can change Bitcoin mining [here](https://amoderninvestor.netlify.app/23/2021/01/).
 
 *Image from amazonaws.com*
