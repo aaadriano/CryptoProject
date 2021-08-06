@@ -16,7 +16,7 @@ Tags:
 <img src="https://www.udacity.com/blog/wp-content/uploads/2020/07/Search-Algorithms_Blog-scaled.jpeg">
 </center>
 
-The **Grover Algorithm** is a search function which returns "True" for one of its possible inputs, and "False" for all the others; its purpose is to find any object in the database that would return "True". Grover's algorithm has a lot of applications, and can be used for estimating the mean and median of a set of numbers, and for solving the collision problem. In addition, it can be used to perform exhaustive searches over the set of possible solution. It is the fastest possible quantum algorithm for searching an unsorted database.
+The **Grover Algorithm** is a search function which returns "True" for one of its possible inputs, and "False" for all the others; its purpose is to find any object in the database that would return "True". Grover's algorithm has a lot of applications, and can be used for estimating the mean and median of a set of numbers, and for solving the collision problem. In addition, it can be used to perform exhaustive searches over the set of possible solutions. It is the fastest possible quantum algorithm for searching an unsorted database.
 
 **Fair warning**, the following bits launch into a really mathematically heavy description of how the algorithm is constructed. If this does not interest you, you probably already know enough to understand what we have done in this project. You can skip [here](https://amoderninvestor.netlify.app/22/2021/01/) to the proposed model.
 

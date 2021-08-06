@@ -11,7 +11,7 @@ Cryptocurrency, to a degree, is exactly what it sounds like. It’s a form of �
 
 Understanding how Bitcoin and other cryptocurrencies work is important since they represent an asset completely embedded in a decentralized market. At the moment, there exist several thousand cryptocurrencies that constitute a multi-billion market. As of July, 2021, their total value was upwards of $1.3 trillion. Apart from profit potential, cryptocurrencies have built a following because of their promise as the “money of the future.” Cryptocurrency investing works similarly to stock market investing where an individual would go through an exchange service to purchase a token or part of one.
 
-In general, previous research has shown that methods for the prediction of cryptocurrency return from poor performance. Cryptocurrency returns are very evidently non-normal, but there is no distribution to jointly fit all the cryptocurrencies– this fact presents a challenge to aspiring forecasters, and often requires different distributions to be imposed on specific currencies during periods of specific market conditions.
+In general, previous research has shown that methods for the prediction of cryptocurrency return poor performance. Cryptocurrency returns are very evidently non-normal, but there is no distribution to jointly fit all the cryptocurrencies– this fact presents a challenge to aspiring forecasters, and often requires different distributions to be imposed on specific currencies during periods of specific market conditions.
 Here is a list of the most popular cryptocurrencies and their most recent price:
 
 | Ticker | Currency     |Price (USD$) |
