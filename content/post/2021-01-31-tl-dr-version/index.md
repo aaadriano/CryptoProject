@@ -37,6 +37,8 @@ Cryptocurrency, to a degree, is exactly what it sounds like. It’s a form of �
 <img src="https://pbs.twimg.com/media/DBIdPDQVYAEcLx_.png">
 </center> *Image from PBS's Twitter*
 </br>
+</br>
+
 In general, previous research has shown that methods for the prediction of cryptocurrency return poor performance. Cryptocurrency returns are very evidently non-normal, but there is no distribution to jointly fit all the cryptocurrencies– this fact presents a challenge to aspiring forecasters, and often requires different distributions to be imposed on specific currencies during periods of specific market conditions.
 
 Here is a list of the most popular cryptocurrencies and their most recent price:
@@ -71,6 +73,7 @@ Tokens are a miner’s reward for completing “blocks” which are added to the
 <img src="https://www.investopedia.com/thmb/Z1iFHo1lyR2eOcR5nyczjzv0pBc=/2972x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/dotdash_Final_How_Does_Bitcoin_Mining_Work_Dec_2020-04-2d73080ca35e4e3bab0455cac17026de.jpg">
 </center> *Images from investopedia.com*
 </br>
+</br>
 
 *Quantum Computing and Quantum Finance*
 </br>
@@ -79,6 +82,7 @@ Quantum computers were designed with the main goal of massive speedups to comput
 <center>
 <img src="https://www.planet-vending.com/wp-content/uploads/2020/01/Quantum-Computing-Infographic.jpeg">
 </center> *Image from planetvending.com*
+</br>
 </br>
 
 Variables in a quantum space exist in **superposition**, where we can think of it as being held in multiple states at the same time (This isn't "technically correct", but it provides a good enough intuitive understanding).
@@ -90,6 +94,7 @@ Here is a picture of IBM's quantum computer:
 <center>
 <img src="https://venturebeat.com/wp-content/uploads/2019/07/q2.jpg?w=1200&strip=all">
 </center> *Image from Venturebeat.com*
+</br>
 </br>
 
 Quantum computers are especially useful for financial algorithms because they are able to take classic algorithms and apply them faster. For example, when applied to portfolio optimization, quantum algorithms can serve to help distribute the money between stocks in a way that would help use growth estimates and volatility to develop an investment strategy. 
@@ -112,13 +117,51 @@ In classical computation, the search (on average) would require checking $N/2$ i
 
 *Putting the Pieces Together*
 </br>
+As of this post, the reward is 6.25 BTC for finishing a block. Since the price is at 39,766.64 dollars, this amounts to a total of 248,541.50 USD. The time it takes to find a hash is controlled for difficulty ever 2016 blocks, but it take a single miner (on average) about 5 years to finish a block. It is important to keep in mind that this number includes people with complex mining rigs and those with a more simplistic approaches to hashing. Still, the potential to make 49,708.30 dollars a year (before expenses) is enough to incentivize many hopeful miners.
+
 In order to mine cryptocurrency, we need to to find a specific (or smaller) sequence of 64 letters and numbers. Cryptocurrency mining involves repeatedly changing our guess until we find a sequence that works. On a classic computer, this can only be done using exhaustive, brute force methods. This takes a long time and is difficult to do, hence the high rewards for success.
 
-For each position of the 64, there are 16 possibilities: 0 though 9 and a, b, c, d, e, and f. At the moment, we also know that the first 8 to 64 positions must be "0". 
+For each position of the 64, there are 16 possibilities: 0 though 9 and a, b, c, d, e, and f. At the moment, we also know that the first 8 to 64 positions must be "0". Our chances of guessing every digit correctly is $\frac{1}{16^{n}}$, where n=48. This is a tiny probability. For a your typical home computer to find this number, it would take would take thousands of years to mine a new block. However, with mining camps and supercomputers, the real number of iterations can be fewer. Nowadays, Bitcoin is designed to be adaptive in difficulty, and one new block is found on average every 10 minutes or 600 seconds. 
 
-For a your typical home computer to find this number, it would take would take thousands of years to mine a new block. However, with mining camps and supercomputers, the real number of iterations can be fewer. Nowadays, Bitcoin is designed to be adaptive in difficulty, and one new block is found on average every 10 minutes or 600 seconds. 
+A quantum computer can lead to a huge advantage. Recall, Grover offers us a speedup from for a database of N to √N. Imagine that we can try 0-f on our first digit at the same time. Likewise, for every subsequent digit, the quantum computer can try all the possibilities in parallel. 
 
-Recall, Grover offers us a speedup from for a database of N to √N. Imagine that we can try 0-f on our first digit at the same time. 
+Classically, the probability of successfully mining a block via random guess is given by $\frac{Trt}{2^{256}}$, where r is the hash rate (the number of guesses made per second), t is the time (seconds), and T is the "adaptive difficulty" mentioned above, which can be computed using the number of hashes equal or less than the target. It is intuitively understood that the faster you can guess, the faster you can find a solution.
+On a quantum computer using Grover, we can represent the equation for Bitcoin mining as $sin^{2}(2r_{q}t\sqrt{T/2^{256}})$
+where $r_{q}$ is the quantum hash rate, determined by the number of Grover iterations per second.
+
+However, there is a big question in regard to whether existing quantum computers can handle the computational load, and if they can't, when one might be available.
+
+For this forecasting, I used two different data sets. The first was a list of quantum computers and their number of qubits, along with the year. This data looks like this:
+
+| Number of Qubits | Year| Quantum Computer |
+|--------|--------------|-------------|
+| 2    | 2013 |IBM |
+| 5    | 2014 |UC Santa Barbara|
+| 3    | 2014 |IBM|
+| 5    | 2016 |IBM|
+| 16   | 2017 |IBM|
+| 20   | 2017 |Google|
+| 49   | 2018 |Google|
+| ...  | ...  |...|
+
+The second data set was taken from [blockchain.info](https://www.blockchain.com/charts/hash-rate?timespan=all&daysAverageString=7&scale=1) and used to model hashing power of each computer. 
+The first series of predictive models found that qubit growth has been historically exponential and such a model is still the best fit. We found that the estimate for ambitions growth will see the number of qubits double every year while the conservative estimate believes it to double every two years. I fit a model to the original data and then generated the two precitions of varying strictness.
+<img src="3.png">
+By our computation, we expect By our computation, we expect:
+
+| Number of Qubits (Min) | Number of Qubits (Max)     | Year |
+|--------|--------------|-------------|
+| 82    | 420 |2025|
+| 117    | 919      |2030|
+| 153    | 1610      |2035 |
+| 189    | 2494 |2040|
+| ...   | ...      |...|
+
+When modeling hashing power for a quantum computer, the conservative estimate was generated assuming we continue at the current rate of growth linearly, and the aggressive estimate uses exponential increases for the first 5 years. Here, I used time series techniques and exponential smoothing forecasting methods.
+
+We found that hash rate also shows exponential growth and that the technology will be available shortly such that it will allow us an advantage over classic mining techniques. By 2025, we will have access to quantum computers strong enough (min. 1e+19 hash rate) and large enough (min. 82 qubits). This will allow quantum computers to be competitive against even resistant Bitcoin networks and add an advantage to mining through quadratic speedups due to parallel processing.
+
+The only thing left is to compute my current probability of success for mining a Bitcoin. My chances of successfully mining a block on my laptop would be about $(\frac{1811.35*14,496,442,856,349}{2^{256}})$, or 2.268e-61, while my chances of doing to on a quantum computer with a 2020 hash rate would be about $sin^{2}(2*10^{19}\sqrt{14,496,442,856,349/2^{256}})$, or 5.01e-26. Those both are very small numbers, but the quantum version is performing 200% better than the classic version. That's  statistically significant advantage.
 
 *Limitations*
 </br>
