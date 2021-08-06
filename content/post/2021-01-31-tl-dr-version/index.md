@@ -229,6 +229,8 @@ or 2.268e-61, while my chances of doing to on a quantum computer with a 2020 has
 <img src="10.png">
 </center>
 or 5.01e-26. Those both are very small numbers, but the quantum version is performing 200% better than the classic version. That's  statistically significant advantage.
+</br>
+</br>
 
 *Limitations*
 </br>
