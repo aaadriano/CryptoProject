@@ -108,12 +108,42 @@ The Grover Algorithm is a search function which returns “True” for one of it
 In classical computation, the search (on average) would require checking $N/2$ items, and at worst all $N$ items. On a quantum computer, however, we can find the marked item in roughly $\sqrt{N}$ steps with Grover’s algorithm, which is a significant improvement to computational efficiency. Since the algorithm does not depend on the structure of the database itself, it can be used more generically. It is fast because it does not have to search for a variable in a sequential order, but can instead work in parallel to consider all possibilities at the same time.
 
 *The Cryptocurrency Market Analysis*
+In order to speak intelligently on cryptocurrency, it is imperitive that we understand the market which it inhabits. All data in this portion of the analysis was gathered from https://www.coindesk.com/price/ (updated: 08/04/2021). 
+Variables of interest are Currency, Date, Closing Price, the 24h High, and the 24h Low.
+
+In current conditions, Bitcoin is so comparatively expensive that it is hard to gauge the other currencies. As a result, it won't be included in the following price chart.
 </br>
 <center>
 <img src="2.png">
 </center> 
 
+Visually, we notice that after a slump over the last two years, cryptocurrency is again regaining popularity very quickly. The questions are: 
 
+1. How quickly?
+2. For how long? &
+3. With which type of growth (we see a steep curve, but is it... Quadratic? Exponential? Polynomial?)? Overall, is now a good time to be investing in or mining cryptocurrency?
+
+Most human activities have some sort of seasonality. However, it can be inconsistent when it comes to the stock market. Here as well, regardless of which currency we choose, it is hard to parse out a consistent seasonal pattern. In some years, it looks like price picks up in the middle of the year, while in others the growth is seen at the tails. Since trading is highly responsive to the social climate of the time, it makes sense that season alone isn't enough to predict pricing. Consecutive closing values appear not to follow one another closely, suggesting an autoregression model for prediction would likely be appropriate, as it often is for stocks. 
+
+The next step was then to  measure to see how well 3 of the most simplistic financial models performed in comparison against the actual value and against each other using the MAPE, or mean absolute percentage error. We want the lowest error values, so the "drift" forecast seems to be the best. A **drift model** is dependent on the average slope between the first and final observations. It tends to work well when the market is heading steadily in a single direction. However, none of the 3 were good estimates, and we expect to outperform them even with simple machine learning models.
+
+When attributing a certain type of growth the the cryptocurrencies seen in the analysis, it is unsurprising that the growth seemed to follow an exponential pattern. However, attributing cryptocurrency price to exponential growth only explains about 7% of the variance. We didn't expect time alone to be enough to unlock the secrets of the stock market, so it is hardly surprising that we get poor results when conditioning primarily on time. 
+
+But the real question here is whether we can make money in the cryptocurrency market. The first thing we can do to determine how long is the market trending up/down is create a **simple moving average (MA)** or **rolling mean**  for each stock. This is done to make identifying trends easier and to smooth noise from the data set. As we increase the number of days we average over, the MA's responsiveness to price variation decreases. The formula for the MA is as follows:
+$$\frac{1}{q}\Sigma^{q-1}_{i=0} x_{t-1}$$
+</br>
+where *q* is the number of days considered, from a series $x_t$ during time period *t*.
+
+Here is an example of what this would look like for Bitcoin in 2021 for 7, 10 and 30 day averages:
+<img src="5.png">
+
+Using this data, we built a very simple buy/sell indicator. We would "buy" when MA7 crosses over MA30 upwards and sell when MA7 crosses MA30 downwards. We could build this trigger using Python, and it would work well, for a while. Overall, this model made 197% in profit in the period 01/02 and 04/05 of 2021. This totals 8 transactions (4 each of Buy/Sell). Of these 8 transactions, the model would have made the correct choice (as compared to the actual market rise/fall) 7/8 (87.5%) times.
+
+One word of caution, however, is that the MA made money because it did not have to account for a sign change in the slope. If the market turned and Bitcoin prices declined while the algorithm was running, the MA model would have lost money. In order to be a safe way to make money, there has to be a built-in trigger. If the slope has changed sign for three consecutive measurements, we would instead buy when the difference was negative and sell when the difference turned positive.
+
+In short, if this forecasting model can make money, imagine what we could do with a more complex model or heftier technology Given current market conditions, this MA model outperforms even Simple Exponential Smoothing (SES) or Autoregressive Integrated Moving Average (ARIMA) models. Overall, it looks like we are expecting an upward trend for cryptocurrency for a little while longer. 
+
+So, let's say that we decide we want to invest in cryprocurrency but don't have the funding. What can we do?
 
 *Putting the Pieces Together*
 </br>
