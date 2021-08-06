@@ -23,6 +23,7 @@ For each position of the 64, there are 16 possibilities: 0 though 9 and a, b, c,
 Well, you have probability $\frac{1}{16}$ of randomly guessing the first digit correctly. You have a  $\frac{1}{16}$*$\frac{1}{16}$=$\frac{1}{256}$ chance of guessing the first and second digits correctly. From here, we infer that our chances of guessing every digit correctly is $\frac{1}{16^{n}}$, where n=48. This is a tiny probability (it is about 0.0000000000000000000000000000000000000000000000000000000159%, if you were curious). For a your typical home computer to find the right hash guessing randomly, it would take would take thousands of years to mine a new block However, with mining camps and supercomputers, the real number of iterations can be fewer. Nowadays, Bitcoin is designed to be adaptive in difficulty, and one new block is found on average every 10 minutes, or 600 seconds. 
 
 *About this "quantum" stuff?*
+</br>
 Let's figure out just home much of an advantage a quantum computer can provide. Recall, Grover offers us a speedup from for a database of N to √N. Imagine that we can try 0-f on our first digit at the same time. Likewise, for every subsequent digit, the quantum computer can try all the possibilities in parallel. Suddenly, we don't have quite as many zeros out in front of that percentage.
 
 Since the number of leading zeros can change, we will consider a hypothetical scenario where we have to generate the full sequence of 64 characters for simplicity. Since we have 64 positions, with each digit having 16 possibilities, we have $16^{64}$ combinations. 16 can be written as a power of 2, $2^{4}$, which will allow us to simplify this number to $2^{256}$. This is where the Bitcoin cryptographic hashing function"SHA-256" gets its name.
@@ -120,7 +121,7 @@ In sum, the technology will be available shortly such that it will allow us an a
 My chances of successfully mining a block on my laptop would be about $(\frac{1811.35*14,496,442,856,349}{2^{256}})$, or 2.268e-61, while my chances of doing to on a quantum computer with a 2020 hash rate would be about $sin^{2}(2*10^{19}\sqrt{14,496,442,856,349/2^{256}})$, or 5.01e-26. Those both are very small numbers, but hopefully it is evident how much better 0.0000000000000000000000000501 is than 0.000000000000000000000000000000000000000000000000000000000000227.
 
 *Limitations*
-
+</br>
 Current iterations of quantum computers have a lot of calculation error. Quantum error correction is required in order to counteract the issue, but it uses a large number of qubits.
 
 Another limitation is specific to Bitcoin. Because miners have become highly specialized, they can be extremely fast compared to even quantum computers. Bitcoin is then relatively resistant to the speedup granted by quantum computers.
