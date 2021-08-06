@@ -16,39 +16,41 @@ As of this post, the reward is 6.25 BTC for finishing a block. Since the price i
 </br>
 In order to acquire cryptocurrency, we need to find a specific (or smaller) sequence of 64 letters and numbers. Cryptocurrency mining involves repeatedly changing our guess until we find a sequence that works. On a classic computer, this can only be done using exhaustive, brute force methods. This takes a long time and is difficult to do, hence the high rewards for success.
 
-For each position of the 64, there are 16 possibilities: 0 though 9 and a, b, c, d, e, and f. At the moment, we also know that the first 8 to 64 positions must be "0". As of 08/04/2021, the number of leading zeros is 17. This means that we are realistically trying to compute only 48 digits out of th 64. 
+For each position of the 64, there are 16 possibilities: 0 though 9 and a, b, c, d, e, and f. At the moment, we also know that the first 8 to 64 positions must be "0". As of 08/04/2021, the number of leading zeros is 17. This means that we are realistically trying to compute only 48 digits out of the 64. 
 
-How many combinations is that? Well, you have probability $\frac{1}{16}$ of randomly guessing the first digit correctly. You have a  $\frac{1}{16}$*$\frac{1}{16}$=$\frac{1}{256}$ chance of guessing the first and second digits correctly. From here, we infer that our chances of guessing every digit correctly is $\frac{1}{16^{n}}$, where n=48. This is a tiny probability (it is about 0.0000000000000000000000000000000000000000000000000000000159%, if you were curious). For a your typical home computer to find the right hash guessing randomly, it would take would take thousands of years to mine a new block alone. However, with mining camps and supercomputers, the real number of iterations can be fewer. Nowadays, Bitcoin is designed to be adaptive in difficulty, and one new block is found on average every 10 minutes or 600 seconds. 
+*How many combinations is that?* 
+</br>
+Well, you have probability $\frac{1}{16}$ of randomly guessing the first digit correctly. You have a  $\frac{1}{16}$*$\frac{1}{16}$=$\frac{1}{256}$ chance of guessing the first and second digits correctly. From here, we infer that our chances of guessing every digit correctly is $\frac{1}{16^{n}}$, where n=48. This is a tiny probability (it is about 0.0000000000000000000000000000000000000000000000000000000159%, if you were curious). For a your typical home computer to find the right hash guessing randomly, it would take would take thousands of years to mine a new block However, with mining camps and supercomputers, the real number of iterations can be fewer. Nowadays, Bitcoin is designed to be adaptive in difficulty, and one new block is found on average every 10 minutes, or 600 seconds. 
 
-Let's figure out just home much of an advantage a quantum computer can provide. Recall, Grover offers us a speedup from for a database of N to √N. Imagine that we can try 0-f on our first digit at the same time. Likewise, for every subsequent digit, the quantum computer can try all the possibilities in parallel.
+*About this "quantum" stuff?*
+Let's figure out just home much of an advantage a quantum computer can provide. Recall, Grover offers us a speedup from for a database of N to √N. Imagine that we can try 0-f on our first digit at the same time. Likewise, for every subsequent digit, the quantum computer can try all the possibilities in parallel. Suddenly, we don't have quite as many zeros out in front of that percentage.
 
-Since the number of leading zeros can change, we will consider a scenario where we have to generate the full sequence of 64 characters for simplicity. Since we have 64 positions, with each digit having 16 possibilities, we have $16^{64}$ combinations. 16 can be written as a power of 2, $2^{4}$, which will allow us to simplify this number to $2^{256}$. This is where the Bitcoin cryptographic hashing function"SHA-256" gets its name.
+Since the number of leading zeros can change, we will consider a hypothetical scenario where we have to generate the full sequence of 64 characters for simplicity. Since we have 64 positions, with each digit having 16 possibilities, we have $16^{64}$ combinations. 16 can be written as a power of 2, $2^{4}$, which will allow us to simplify this number to $2^{256}$. This is where the Bitcoin cryptographic hashing function"SHA-256" gets its name.
 
 Classically, the probability of successfully mining a block via random guess is given by $\frac{Trt}{2^{256}}$, where r is the hash rate (the number of guesses made per second), t is the time (seconds), and T is the "adaptive difficulty" mentioned above, which can be computed using the number of hashes equal or less than the target. It is intuitively understood that the faster you can guess, the faster you can find a solution.
 
 My personal laptop uses an Intel i7 processor, which can reach a hash rate of 1811.35 H/s, so we will use that number for further calculations. Also, at the time of this writing, T= 14,496,442,856,349. Difficulty and other statistics can be found on the Bitcoin [website](https://btc.com/stats/diff).
 
-
 On a quantum computer using Grover, we can represent the equation for Bitcoin mining as $sin^{2}(2r_{q}t\sqrt{T/2^{256}})$
 where $r_{q}$ is the quantum hash rate, determined by the number of Grover iterations per second. Remember, T is adaptive, so for Grover to work we need to make sure that we run the loop and take a measurement before T changes. Now, the interval between blocks shows an exponential distribution, which means that the chance that a block is still discoverable after a time *t* is $e^{-t/600}$.
 
-WE can then represent our earning potential on a quantum computer with $Re^{-t/600}sin^{2}(2r_{q}t\sqrt{T/2^{256}})-Ct$ where C is the constant cost of running the computer and R is the 6.25 BTC reward.
+We can then represent our earning potential on a quantum computer with $Re^{-t/600}sin^{2}(2r_{q}t\sqrt{T/2^{256}})-Ct$ where C is the constant cost of running the computer and R is the 6.25 BTC reward.
 
 The number of qubits available to a quantum computer would change the outcome, but after a certain point, the advantage begins to level out and will not exceed $\sqrt{2^{256}/T}$.
 
 One could ask, how many qubits will be available in the near future? To answer this, we have to look at the rate of growth quantum computers have shown in recent years and generate a new model for predicting qubit availability. Qubit growth has been historically exponential, and we verify that the model is still the best fit in this case. We found that the estimate for ambitions growth will see the number of qubits double every year while the conservative estimate believes it to double every two years.
 
 Here is an example of the data:
-| Number of Qubits | Year     |Quantum Computer |
+| Number of Qubits | Year| Quantum Computer |
 |--------|--------------|-------------|
-| 2    | 2013      |IBM |
+| 2    | 2013 |IBM |
 | 5    | 2014 |UC Santa Barbara|
-| 3    | 2014      |IBM|
-| 5    | 2016      |IBM |
-| 16    | 2017 |IBM|
-| 20   | 2017      |Google|
-| 49   | 2018      |Google|
-| ...   | ...      |...|
+| 3    | 2014 |IBM|
+| 5    | 2016 |IBM|
+| 16   | 2017 |IBM|
+| 20   | 2017 |Google|
+| 49   | 2018 |Google|
+| ...  | ...  |...|
 
 ```{r, echo=FALSE}
 x= c(2013,2014,2014,2016,2017,2017,2018)
