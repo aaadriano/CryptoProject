@@ -1,0 +1,8 @@
+code .MathJax {
+  color: black;
+  background-color: white;
+}
+
+.MathJax_Display {
+  color: #FFF !important;
+}

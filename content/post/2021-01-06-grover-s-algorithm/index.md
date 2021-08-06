@@ -11,7 +11,7 @@ Tags:
   - Development
   - golang
 ---
-<center>
+<span style="color:red"><center>
 </br>
 <img src="https://www.udacity.com/blog/wp-content/uploads/2020/07/Search-Algorithms_Blog-scaled.jpeg">
 </center>
@@ -210,4 +210,4 @@ $\theta$ $\approx$ $\frac{1}{\sqrt{N-1}}$
 ****
 Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project [here](https://amoderninvestor.netlify.app/23/2021/01/).
 
-*Image from udacity.com*
+*Image from udacity.com*</span>
