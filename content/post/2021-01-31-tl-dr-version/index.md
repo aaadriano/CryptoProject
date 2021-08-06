@@ -108,7 +108,12 @@ The Grover Algorithm is a search function which returns “True” for one of it
 In classical computation, the search (on average) would require checking $N/2$ items, and at worst all $N$ items. On a quantum computer, however, we can find the marked item in roughly $\sqrt{N}$ steps with Grover’s algorithm, which is a significant improvement to computational efficiency. Since the algorithm does not depend on the structure of the database itself, it can be used more generically. It is fast because it does not have to search for a variable in a sequential order, but can instead work in parallel to consider all possibilities at the same time.
 
 *The Cryptocurrency Market Analysis*
-In order to speak intelligently on cryptocurrency, it is imperitive that we understand the market which it inhabits. All data in this portion of the analysis was gathered from https://www.coindesk.com/price/ (updated: 08/04/2021). 
+</br>
+
+In order to speak intelligently on cryptocurrency, it is imperitive that we understand the market which it inhabits. 
+
+All data in this portion of the analysis was gathered from https://www.coindesk.com/price/ (updated: 08/04/2021). 
+
 Variables of interest are Currency, Date, Closing Price, the 24h High, and the 24h Low.
 
 In current conditions, Bitcoin is so comparatively expensive that it is hard to gauge the other currencies. As a result, it won't be included in the following price chart.
@@ -121,16 +126,40 @@ Visually, we notice that after a slump over the last two years, cryptocurrency i
 
 1. How quickly?
 2. For how long? &
-3. With which type of growth (we see a steep curve, but is it... Quadratic? Exponential? Polynomial?)? Overall, is now a good time to be investing in or mining cryptocurrency?
+3. With which type of growth (Quadratic? Exponential? Polynomial?)? Overall, is now a good time to be investing in or mining cryptocurrency?
 
 Most human activities have some sort of seasonality. However, it can be inconsistent when it comes to the stock market. Here as well, regardless of which currency we choose, it is hard to parse out a consistent seasonal pattern. In some years, it looks like price picks up in the middle of the year, while in others the growth is seen at the tails. Since trading is highly responsive to the social climate of the time, it makes sense that season alone isn't enough to predict pricing. Consecutive closing values appear not to follow one another closely, suggesting an autoregression model for prediction would likely be appropriate, as it often is for stocks. 
+</br>
+<center>
+<img src="6.png">
+</center> 
 
 The next step was then to  measure to see how well 3 of the most simplistic financial models performed in comparison against the actual value and against each other using the MAPE, or mean absolute percentage error. We want the lowest error values, so the "drift" forecast seems to be the best. A **drift model** is dependent on the average slope between the first and final observations. It tends to work well when the market is heading steadily in a single direction. However, none of the 3 were good estimates, and we expect to outperform them even with simple machine learning models.
 
-When attributing a certain type of growth the the cryptocurrencies seen in the analysis, it is unsurprising that the growth seemed to follow an exponential pattern. However, attributing cryptocurrency price to exponential growth only explains about 7% of the variance. We didn't expect time alone to be enough to unlock the secrets of the stock market, so it is hardly surprising that we get poor results when conditioning primarily on time. 
+</br>
+<center>
+<img src="7.png">
+</center>
+
+|**Average Method**|  MAPE|
+|-------------|--------------|
+|Training set | 17.88|
+|Test set     | 29.67|
+|**Naïve Method**|  |
+|Training set | 4.70|
+|Test set     | 29.67|
+|**Drift Method**|  |
+|Training set | 4.59|
+|Test set     | 6.01|
+
+When attributing a certain type of growth to the cryptocurrencies seen in the analysis, it is unsurprising that the growth seemed to follow an exponential pattern. However, attributing cryptocurrency price to exponential growth only explains about 7% of the variance. We didn't expect time alone to be enough to unlock the secrets of the stock market, so it is hardly surprising that we get poor results when conditioning primarily on time. 
 
 But the real question here is whether we can make money in the cryptocurrency market. The first thing we can do to determine how long is the market trending up/down is create a **simple moving average (MA)** or **rolling mean**  for each stock. This is done to make identifying trends easier and to smooth noise from the data set. As we increase the number of days we average over, the MA's responsiveness to price variation decreases. The formula for the MA is as follows:
-$$\frac{1}{q}\Sigma^{q-1}_{i=0} x_{t-1}$$
+</br>
+<center>
+<img src="8.png">
+</center>
+
 </br>
 where *q* is the number of days considered, from a series $x_t$ during time period *t*.
 
@@ -191,7 +220,15 @@ When modeling hashing power for a quantum computer, the conservative estimate wa
 
 We found that hash rate also shows exponential growth and that the technology will be available shortly such that it will allow us an advantage over classic mining techniques. By 2025, we will have access to quantum computers strong enough (min. 1e+19 hash rate) and large enough (min. 82 qubits). This will allow quantum computers to be competitive against even resistant Bitcoin networks and add an advantage to mining through quadratic speedups due to parallel processing.
 
-The only thing left is to compute my current probability of success for mining a Bitcoin. My chances of successfully mining a block on my laptop would be about $(\frac{1811.35*14,496,442,856,349}{2^{256}})$, or 2.268e-61, while my chances of doing to on a quantum computer with a 2020 hash rate would be about $sin^{2}(2*10^{19}\sqrt{14,496,442,856,349/2^{256}})$, or 5.01e-26. Those both are very small numbers, but the quantum version is performing 200% better than the classic version. That's  statistically significant advantage.
+The only thing left is to compute my current probability of success for mining a Bitcoin. My chances of successfully mining a block on my laptop would be about
+<center>
+<img src="9.png">
+</center>
+or 2.268e-61, while my chances of doing to on a quantum computer with a 2020 hash rate would be about </br>
+<center>
+<img src="10.png">
+</center>
+or 5.01e-26. Those both are very small numbers, but the quantum version is performing 200% better than the classic version. That's  statistically significant advantage.
 
 *Limitations*
 </br>
