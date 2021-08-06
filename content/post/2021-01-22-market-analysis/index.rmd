@@ -61,6 +61,7 @@ The most simplistic models for stocks are 3 easy, nonseasonal forecasting method
 1. Average method,  literally the mean of all selected historic data, expressed as
 </br>
 AM = $\frac{\Sigma^{T}_{t=1} x_{t}}{T}$ 
+``{r}
 </br>
 where $x_t$ is the observation at a given time *t* and *T* is the total number of observations
 </br>

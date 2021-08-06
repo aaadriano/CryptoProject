@@ -18,7 +18,7 @@ Tags:
 
 The **Grover Algorithm** is a search function which returns "True" for one of its possible inputs, and "False" for all the others; its purpose is to find any object in the database that would return "True". Grover's algorithm has a lot of applications, and can be used for estimating the mean and median of a set of numbers, and for solving the collision problem. In addition, it can be used to perform exhaustive searches over the set of possible solution. It is the fastest possible quantum algorithm for searching an unsorted database.
 
-**Fair warning**, the following bits launch into a really mathematically heavy description of how the algorithm is constructed. If this does not interest you, you probably already know enough to understand what we have done in this project. You can skip [here](https://wucrypto-project.netlify.app/) to the proposed model.
+**Fair warning**, the following bits launch into a really mathematically heavy description of how the algorithm is constructed. If this does not interest you, you probably already know enough to understand what we have done in this project. You can skip [here](https://amoderninvestor.netlify.app/23/2021/01/) to the proposed model.
 
 Grover's algorithm was designed to speed up an unstructured database search quadratically. It is comprised of Hadamard gates, an oracle, controlled-Z gates, and a reflection. We will discuss each of these pieces in turn. First, here is a visual representation of the Grover circuit:
 
@@ -45,6 +45,7 @@ For example, maps the observational basis state |0⟩ to the superimposed state 
 The Hadamard gate can also be considered geometrically as a 90º rotation of the Bloch Sphere about the Y-axis, followed by a 180º rotation about the X-axis.
 
 <i>Advanced Note</i>: The Hadamard gate is the lowest dimensional case (one-qubit) of the quantum Fourier transform.
+</br>
 </br>
 *The Oracle*
 </br>
@@ -207,6 +208,6 @@ tan($\theta$) = $\frac{1}{\sqrt{N}}$ $\div$  $\frac{\sqrt{N-1}}{\sqrt{N}}$
 $\theta$ $\approx$ $\frac{1}{\sqrt{N-1}}$
 
 ****
-Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project [here](https://wucrypto-project.netlify.app/).
+Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project [here](https://amoderninvestor.netlify.app/23/2021/01/).
 
 *Image from udacity.com*
