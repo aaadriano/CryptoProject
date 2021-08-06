@@ -1,0 +1,69 @@
+---
+title: Quantum Mining Model
+author: ''
+date: '2021-01-22'
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<center>
+</br>
+<img src="https://images-global.nhst.tech/image/QjJSOC9UZ2dQY25EY3RManFqc0grZ1Vja2FvQ1hTU3dlcVZadmlGSm9BMD0=/nhst/binary/358d239815f9af49ca6409c4962e868c">
+</center>
+<p>Now that we have covered <a href="https://amoderninvestor.netlify.app/30/2021/01/">what cryptocurrency is</a> and <a href="https://amoderninvestor.netlify.app/27/2021/01/">how mining it works</a>, we apply our two special tools (<a href="https://amoderninvestor.netlify.app/29/2021/01/">quantum computers</a> and <a href="https://amoderninvestor.netlify.app/26/2021/01/">Grover’s Algorithm</a>).</p>
+<p>As of this post, the reward is 6.25 BTC for finishing a block. Since the price is at 39,766.64 dollars, this amounts to a total of 248,541.50 USD. The time it takes to find a hash is controlled for difficulty ever 2016 blocks, but it take a single miner (on average) about 5 years to finish a block. It is important to keep in mind that this number includes people with complex mining rigs and those with a more simplistic approaches to hashing. Still, the potential to make 49,708.30 dollars a year (before expenses) is enough to incentivize many hopeful miners.</p>
+<p><strong>Theory</strong>
+</br>
+In order to acquire cryptocurrency, we need to find a specific (or smaller) sequence of 64 letters and numbers. Cryptocurrency mining involves repeatedly changing our guess until we find a sequence that works. On a classic computer, this can only be done using exhaustive, brute force methods. This takes a long time and is difficult to do, hence the high rewards for success.</p>
+<p>For each position of the 64, there are 16 possibilities: 0 though 9 and a, b, c, d, e, and f. At the moment, we also know that the first 8 to 64 positions must be “0”. As of 08/04/2021, the number of leading zeros is 17. This means that we are realistically trying to compute only 48 digits out of th 64.</p>
+<p>How many combinations is that? Well, you have probability <span class="math inline">\(\frac{1}{16}\)</span> of randomly guessing the first digit correctly. You have a <span class="math inline">\(\frac{1}{16}\)</span>*<span class="math inline">\(\frac{1}{16}\)</span>=<span class="math inline">\(\frac{1}{256}\)</span> chance of guessing the first and second digits correctly. From here, we infer that our chances of guessing every digit correctly is <span class="math inline">\(\frac{1}{16^{n}}\)</span>, where n=48. This is a tiny probability (it is about 0.0000000000000000000000000000000000000000000000000000000159%, if you were curious). For a your typical home computer to find the right hash guessing randomly, it would take would take thousands of years to mine a new block alone. However, with mining camps and supercomputers, the real number of iterations can be fewer. Nowadays, Bitcoin is designed to be adaptive in difficulty, and one new block is found on average every 10 minutes or 600 seconds.</p>
+<p>Let’s figure out just home much of an advantage a quantum computer can provide. Recall, Grover offers us a speedup from for a database of N to √N. Imagine that we can try 0-f on our first digit at the same time. Likewise, for every subsequent digit, the quantum computer can try all the possibilities in parallel.</p>
+<p>Since the number of leading zeros can change, we will consider a scenario where we have to generate the full sequence of 64 characters for simplicity. Since we have 64 positions, with each digit having 16 possibilities, we have <span class="math inline">\(16^{64}\)</span> combinations. 16 can be written as a power of 2, <span class="math inline">\(2^{4}\)</span>, which will allow us to simplify this number to <span class="math inline">\(2^{256}\)</span>. This is where the Bitcoin cryptographic hashing function“SHA-256” gets its name.</p>
+<p>Classically, the probability of successfully mining a block via random guess is given by <span class="math inline">\(\frac{Trt}{2^{256}}\)</span>, where r is the hash rate (the number of guesses made per second), t is the time (seconds), and T is the “adaptive difficulty” mentioned above, which can be computed using the number of hashes equal or less than the target. It is intuitively understood that the faster you can guess, the faster you can find a solution.</p>
+<p>My personal laptop uses an Intel i7 processor, which can reach a hash rate of 1811.35 H/s, so we will use that number for further calculations. Also, at the time of this writing, T= 14,496,442,856,349. Difficulty and other statistics can be found on the Bitcoin <a href="https://btc.com/stats/diff">website</a>.</p>
+<p>On a quantum computer using Grover, we can represent the equation for Bitcoin mining as <span class="math inline">\(sin^{2}(2r_{q}t\sqrt{T/2^{256}})\)</span>
+where <span class="math inline">\(r_{q}\)</span> is the quantum hash rate, determined by the number of Grover iterations per second. Remember, T is adaptive, so for Grover to work we need to make sure that we run the loop and take a measurement before T changes. Now, the interval between blocks shows an exponential distribution, which means that the chance that a block is still discoverable after a time <em>t</em> is <span class="math inline">\(e^{-t/600}\)</span>.</p>
+<p>WE can then represent our earning potential on a quantum computer with <span class="math inline">\(Re^{-t/600}sin^{2}(2r_{q}t\sqrt{T/2^{256}})-Ct\)</span> where C is the constant cost of running the computer and R is the 6.25 BTC reward.</p>
+<p>The number of qubits available to a quantum computer would change the outcome, but after a certain point, the advantage begins to level out and will not exceed <span class="math inline">\(\sqrt{2^{256}/T}\)</span>.</p>
+<p>One could ask, how many qubits will be available in the near future? To answer this, we have to look at the rate of growth quantum computers have shown in recent years and generate a new model for predicting qubit availability. Qubit growth has been historically exponential, and we verify that the model is still the best fit in this case. We found that the estimate for ambitions growth will see the number of qubits double every year while the conservative estimate believes it to double every two years.</p>
+<p>Here is an example of the data:
+| Number of Qubits | Year |Quantum Computer |
+|——–|————–|————-|
+| 2 | 2013 |IBM |
+| 5 | 2014 |UC Santa Barbara|
+| 3 | 2014 |IBM|
+| 5 | 2016 |IBM |
+| 16 | 2017 |IBM|
+| 20 | 2017 |Google|
+| 49 | 2018 |Google|
+| … | … |…|</p>
+<pre><code>## Warning in predict.lm(Conservative_Growth, newdata = prd): prediction from a
+## rank-deficient fit may be misleading</code></pre>
+<pre><code>## Warning: Removed 5 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>By our computation, we expect:
+| Number of Qubits (Min) | Number of Qubits (Max) | Year |
+|——–|————–|————-|
+| 82 | 420 |2025|
+| 117 | 919 |2030|
+| 153 | 1610 |2035 |
+| 189 | 2494 |2040|
+| … | … |…|</p>
+<p>Along with the number of qubits, we can model hashing power of each computer. We can again notice the rates from 2012-2020 and see exponential growth. Data for this portion of the project was gathered at <a href="https://www.blockchain.com/charts/hash-rate?timespan=all&amp;daysAverageString=7&amp;scale=1">blockchain.info</a>. Here, the conservative estimate was generated assuming we continue at the current rate of growth linearly, and the aggressive estimate uses exponential increases for the first 5 years.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>By our computation, we expect:
+| Hash Rate (Min) | Hash Rate (Max) | Year |
+|——–|————–|————-|
+| <span class="math inline">\(10^{19}\)</span> | <span class="math inline">\(10^{21}\)</span> |2025|
+| <span class="math inline">\(10^{19.2}\)</span> | <span class="math inline">\(10^{21.2}\)</span> |2030|
+| <span class="math inline">\(10^{19.4}\)</span> | <span class="math inline">\(10^{21.4}\)</span> |2035 |
+| <span class="math inline">\(10^{19.8}\)</span> | <span class="math inline">\(10^{21.8}\)</span> |2040|
+| … | … |…|</p>
+<p>In sum, the technology will be available shortly such that it will allow us an advantage over classic mining techniques. By 2025, we will have access to quantum computers strong enough (min. 1e+19 ash rate) and large enough (min. 82 qubits). This will allow quantum computers to be competitive against even resistant Bitcoin networks and add an advantage to mining through quadratic speedups due to parallel processing.</p>
+<p><em>Limitations</em></p>
+<p>Current iterations of quantum computers have a lot of calculation error. Quantum error correction is required in order to counteract the issue, but it uses a large number of qubits.</p>
+<p>Another limitation is specific to Bitcoin. Because miners have become highly specialized, they can be extremely fast compared to even quantum computers. Bitcoin is then relatively resistant to the speedup granted by quantum computers.</p>
+<p>Finally, it should be mentioned that we talk about using quantum computers in a <strong>legal</strong> way to honestly mine cryptocurrency. There is a real danger that quantum computers will enable hackers to <em>steal</em> finished blocks from individuals with real computers. That is a different type of security problem that is outside the scope of this inquiry.</p>
+<p>What are your impressions? Read some closing thoughts on quantum computing and cryptocurrency <a href="https://amoderninvestor.netlify.app/21/2021/01/">here</a>.</p>
+<p><em>Image from nhst.tech</em></p>
