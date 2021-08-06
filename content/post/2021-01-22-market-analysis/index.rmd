@@ -43,9 +43,10 @@ ggplot(aes(x = Date, y = ClosingPrice, color=Currency)) + geom_line() +
 ```
 
 Visually, we notice that after a slump over the last two years, cryptocurrency is again regaining popularity very quickly. The questions are: 
-1) how quickly?
-2) for how long? and
-3) with which type of growth (we see a steep curve, but is it... Quadratic? Exponential? Polynomial?)? Is now a good time to be investing in or mining cryptocurrency?
+
+1. How quickly?
+2. For how long? &
+3. With which type of growth (we see a steep curve, but is it... Quadratic? Exponential? Polynomial?)? Overall, is now a good time to be investing in or mining cryptocurrency?
 
 Most human activities have some sort of seasonality. However, it can be inconsistent when it comes to the stock market. 
 
@@ -56,6 +57,7 @@ Crypto %>% filter(Currency == "XLM" | Currency == "LTC" | Currency == "ETH") %>%
 
 Regardless of which currency we choose, it is hard to parse out a consistent seasonal pattern. In some years, it looks like price picks up in the middle of the year, while in others the growth is seen at the tails. Since trading is highly responsive to the social climate of the time, it makes sense that season alone isn't enough to predict pricing. Consecutive closing values appear not to follow one another closely, suggesting an autoregression model for prediction would likely be appropriate, as it often is for stocks. 
 
+## Basic Forecasting
 The most simplistic models for stocks are 3 easy, nonseasonal forecasting methods, and they are often used as benchmarks for future models. The three forecasting methods are:
 </br>
 
@@ -115,7 +117,7 @@ We can measure to see how well these models performed in comparison against the 
 
 ## Identity Crisis: What am I?
 
-We can tackle questions (1) & (3) from above (what kind of growth is this?, what is the slope?) fairly quickly by fitting a few models and finding the best $R^2$ value. We ask this question because the rate of change for the price variable can help us determine which predictive models would be most effective.
+We can tackle questions (1) & (3) from above (What kind of growth is this? What is the slope?) fairly quickly by fitting a few models and finding the best $R^2$ value. We ask this question because the rate of change for the price variable can help us determine which predictive models would be most effective.
 
 The outcomes are as follows:
 
@@ -132,14 +134,12 @@ Ultimately, attributing cryptocurrency price to exponential growth only explains
 
 # Can we make money?
 
-The first thing we can do to answer question (2) (how long is the market trending up/down?) is create a *simple moving average (MA)* or *rolling mean*  for each stock. This is done to make identifying trends easier and to smooth noise from the data set. As we increase the number of days we average over, the MA's responsiveness to price variation decreases. The formula for the MA is as follows:
-
-MA = $\frac{1}{q}\Sigma^{q-1}_{i=0} x_{t-1}$
+The first thing we can do to answer question (2) (How long is the market trending up/down?) is create a **simple moving average (MA)** or **rolling mean**  for each stock. This is done to make identifying trends easier and to smooth noise from the data set. As we increase the number of days we average over, the MA's responsiveness to price variation decreases. The formula for the MA is as follows:
+$$\frac{1}{q}\Sigma^{q-1}_{i=0} x_{t-1}$$
 </br>
 where *q* is the number of days considered, from a series $x_t$ during time period *t*.
 
-If we choose a smaller window, the MA can adapt faster to changes. Let's try 7, 15, and 30 day versions of the MA:
-
+If we choose a smaller window, the MA can adapt faster to changes. Let's try 7, 15, and 30 day versions of the MA.
 ```{r echo=FALSE}
 Crypto2 <- Crypto %>% 
   group_by(Currency) %>%
@@ -178,9 +178,9 @@ kable(tail(Signal %>% filter(Currency == "BTC") %>% arrange(Date)))
 ```
 
 Continuing the Bitcoin example: 
-With this this buy/sell model, let's see what happened if we followed the model's buy/sell predictions. Say we  first purchase Bitcoin on  1/02, sold on 01/19, purchased again on 02/07, sold on 02/24, purchased on 03/07, sold on 03/20, purchased on 03/29, and finally sold again on 04/05. 
+With this this buy/sell model, let's see what happened if we followed the model's buy/sell predictions. Say we  first purchase Bitcoin on  1/02, sold on 01/19, purchased again on 02/07, sold on 02/24, purchased on 03/07, sold on 03/20, purchased on 03/29, and finally sold again on 04/05, all in accordance with the trigger we designed.
 
-To be more realistic, let's assume we bought 3.11% of a Bitcoin for 1k on 01/02 of this year.
+To be more realistic, let's assume we bought 3.11% of a Bitcoin for $1,000 on 01/02 of this year.
 
 | Date  | Buy/Sell | Cost    | Timing        |
 |-------|----------|----------|---------------|
@@ -194,15 +194,18 @@ To be more realistic, let's assume we bought 3.11% of a Bitcoin for 1k on 01/02 
 | 04/05 | Sell     | 2,971.66 | Ideal    |
 | | **Total  Earned**   |1,971.65 |
 
-Overall, this model made 1,971.65 or 197% in profit. For reference, if we purchased the same amount of Bitcoin on that first day and left it in until the last day, I would have withdrawn 1,805.05, or about 805 dollars of profit.
+Overall, this model made 1,971.65 dollars or 197% in profit. 
+For reference, if we purchased the same amount of Bitcoin on that first day and left it in until the last day, I would have withdrawn 1,805.05 dollars.
+This is about 805 dollars of profit, which shows that our model is more profitable than inaction.
 
 This totals 8 transactions (4 each of Buy/Sell). Of these 8 transactions, the model would have made the correct choice (as compared to the actual market rise/fall) 7/8 (87.5%) times.
 
 **In Sum:** If this (a most simplistic forecasting model) can make money, imagine what we could do with a more complex model (or even better, multiple aggregated complex models). Given current market conditions, this MA model outperforms even Simple Exponential Smoothing (SES) or Autoregressive Integrated Moving Average (ARIMA) models. Overall, it looks like we are expecting an upward trend for cryptocurrency for a little while longer. Good Luck!
 
-**Warning:** 
+**Warning!** 
 </br>The MA made money because it did not have to account for a sign change in the slope. If the market turned and Bitcoin prices declined while the algorithm was running, the MA model would have lost money. In order to be a safe way to make money, there has to be a built-in trigger. If the slope has changed sign for three consecutive measurements, we would instead buy when the difference was negative and sell when the difference turned positive.
 
-Learn more about how you can acquire cryptocurrency without purchasing it [here](https://amoderninvestor.netlify.app/27/2021/01/) or how quantum computers can help miners work more efficiently [here](https://amoderninvestor.netlify.app/23/2021/01/).
+So, let's say that we decide we want to invest in cryprocurrency but don't have the funding. What can we do?
+Learn more about how you can acquire cryptocurrency without purchasing it [here](https://amoderninvestor.netlify.app/27/2021/01/) or how quantum computers can help miners work more efficiently [here](https://amoderninvestor.netlify.app/22/2021/01/).
 
 *Image from schwab.com*

@@ -21,6 +21,6 @@ This body of work pairs those two exiting innovations together, developing a fra
 
 - Click [here](https://amoderninvestor.netlify.app/30/2021/01/) to learn about cryptocurrency instead.
 
-- If you are comfortable with both of those, click [here](https://amoderninvestor.netlify.app/23/2021/01/) to find out about more about this project.
+- If you are comfortable with both of those, click [here](https://amoderninvestor.netlify.app/22/2021/01/) to find out about more about this project.
 
 *Image from TechFunnel.com*

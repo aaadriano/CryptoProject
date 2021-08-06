@@ -18,7 +18,7 @@ Tags:
 
 The **Grover Algorithm** is a search function which returns "True" for one of its possible inputs, and "False" for all the others; its purpose is to find any object in the database that would return "True". Grover's algorithm has a lot of applications, and can be used for estimating the mean and median of a set of numbers, and for solving the collision problem. In addition, it can be used to perform exhaustive searches over the set of possible solution. It is the fastest possible quantum algorithm for searching an unsorted database.
 
-**Fair warning**, the following bits launch into a really mathematically heavy description of how the algorithm is constructed. If this does not interest you, you probably already know enough to understand what we have done in this project. You can skip [here](https://amoderninvestor.netlify.app/23/2021/01/) to the proposed model.
+**Fair warning**, the following bits launch into a really mathematically heavy description of how the algorithm is constructed. If this does not interest you, you probably already know enough to understand what we have done in this project. You can skip [here](https://amoderninvestor.netlify.app/22/2021/01/) to the proposed model.
 
 Grover's algorithm was designed to speed up an unstructured database search quadratically. It is comprised of Hadamard gates, an oracle, controlled-Z gates, and a reflection. We will discuss each of these pieces in turn. First, here is a visual representation of the Grover circuit:
 
@@ -38,7 +38,7 @@ In classical computation, the search (on average) would require checking $N/2$ i
 The <b>Hadamard gate</b> is a single-qubit operation that creates an uniform superposition of the two basis states (a measurement of an output state will return 1 or 0 with equal probabilities).
 
 In coordinates, the Hadamard gate applies the <i>Hadamard Matrix</i> to a coordinatized qubit:
-$$H=\frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1\\1 & -1\end{bmatrix}$$
+<img src="h.png" />
 
 For example, maps the observational basis state |0⟩ to the superimposed state $\frac{|0\rangle+|1\rangle}{\sqrt{2}}$ and |1⟩ to $\frac{|0\rangle-|1\rangle}{\sqrt{2}}$ 
 
@@ -72,32 +72,7 @@ $$U_{\omega}|x\rangle=\hphantom{-}|x\rangle\quad\text{if }x\neq\omega$$
 $$U_{\omega}|x\rangle=-|x\rangle\quad\text{if }x=\omega$$
 
 This oracle will be a diagonal matrix, where the entry that correspond to the marked item will have a negative phase. For example, if we have three qubits and $\omega = |101\rangle$, our oracle will have the matrix:
-
-$$
-U_\omega = 
-\begin{bmatrix}
-1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
-0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 \\
-0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
-\end{bmatrix}
-\begin{aligned}
-\\
-\\
-\\
-\\
-\\
-\\
-\leftarrow \omega = \text{101}\\
-\\
-\\
-\\
-\end{aligned}
-$$
+<img src="w.png" />
 
 There are many computational problems in which it’s difficult to _find_ a solution, but relatively easy to _verify_ a solution. For these problems, we can create a function $f$ that takes a proposed solution $x$, and returns $f(x) = 0$ if $x$ is not a solution ($x \neq \omega$) and $f(x) = 1$ for a valid solution ($x = \omega$). Our oracle can then be described as:
 
@@ -107,15 +82,7 @@ $$
 
 and the oracle's matrix will be a diagonal matrix of the form:
 
-$$
-U_\omega = 
-\begin{bmatrix}
-(-1)^{f(0)} &   0         & \cdots &   0         \\
-0           & (-1)^{f(1)} & \cdots &   0         \\
-\vdots      &   0         & \ddots & \vdots      \\
-0           &   0         & \cdots & (-1)^{f(2^n-1)} \\
-\end{bmatrix}
-$$
+<img src="u.png" />
 
 Thus, for an arbitrary ket $|y>$, the component of $|y>$ in the direction $|w>$ is reversed, while the components of $|y>$ in all the directions orthogonal to $w$ are unchanged. Effectively, this corresponds to a reflection of $|y>$ around the vector $|y-w>$.  
 
@@ -202,6 +169,6 @@ tan($\theta$) = $\frac{1}{\sqrt{N}}$ $\div$  $\frac{\sqrt{N-1}}{\sqrt{N}}$
 $\theta$ $\approx$ $\frac{1}{\sqrt{N-1}}$
 
 ****
-Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project [here](https://amoderninvestor.netlify.app/23/2021/01/).
+Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project [here](https://amoderninvestor.netlify.app/22/2021/01/).
 
 *Image from udacity.com*

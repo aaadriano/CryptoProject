@@ -34,8 +34,7 @@ $$\frac{1}{\sqrt{q}}\sum_{a=0}^{q-1}|a,x^a\text{ mod }n\rangle$$
 
 7) We then measure register 2 and observe some value, *k*. As always, the act of observation collapses the resister into a single superposition between 0 and *q*-1 such that $x^{a}$ mod *n* = *k*. Now, out state is $$\frac{1}{\sqrt{||A||}}\sum_{a'=a'\in A}|a',k\rangle$$ where $\|A\|$ is the number of elements in the set of all *a*'s where $x^{a}$ mod *n* = *k*.
 
-8) We now apply a Fourier transform in a single step to state $|a\rangle$, defined as $$|a\rangle=\frac{1}{\sqrt{q}}\sum_{c=0}^{q-1}|c\rangle*e^{2\pi iac/q}$$ to get <img src="d.png">
-
+8) We now apply a Fourier transform in a single step to state $|a\rangle$, defined as $$|a\rangle=\frac{1}{\sqrt{q}}\sum_{c=0}^{q-1}|c\rangle*e^{2\pi iac/q}$$ to get 
 $$\frac{1}{\sqrt{||A||}}\sum_{a'\in A}\frac{1}{\sqrt{q}}\sum_{c=0}^{q-1}|c,k\rangle*e^{2\pi ia'c/q}$$
 
 9) Finally, we can measure register 1. Let this measurement be called *m*. We note that *m* is a multiple of *q/r* with very high probability, where *r* is the desired period.
@@ -51,6 +50,6 @@ While the quantum computers in use today are not strong enough to perform these 
 
 If we are content with this explanation of the Shor's algorithm, click [here](https://amoderninvestor.netlify.app/) to return to the main page.
 
-Just as Shor was able to break RSA encryption (which would otherwise take thousands of years) with a quantum computer, we talk about how quantum computing can change Bitcoin mining [here](https://amoderninvestor.netlify.app/23/2021/01/).
+Just as Shor was able to break RSA encryption (which would otherwise take thousands of years) with a quantum computer, we talk about how quantum computing can change Bitcoin mining [here](https://amoderninvestor.netlify.app/22/2021/01/).
 
 *Image from amazonaws.com*

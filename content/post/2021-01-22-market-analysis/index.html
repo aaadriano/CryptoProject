@@ -15,13 +15,17 @@ date: '2021-01-23'
 Variables of interest are Currency, Date, Closing Price, the 24h High, and the 24h Low.</p>
 <p>In current conditions, Bitcoin is so comparatively expensive that it is hard to gauge the other currencies. As a result, it won’t be included in the following price chart.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>Visually, we notice that after a slump over the last two years, cryptocurrency is again regaining popularity very quickly. The questions are:
-1) how quickly?
-2) for how long? and
-3) with which type of growth (we see a steep curve, but is it… Quadratic? Exponential? Polynomial?)? Is now a good time to be investing in or mining cryptocurrency?</p>
+<p>Visually, we notice that after a slump over the last two years, cryptocurrency is again regaining popularity very quickly. The questions are:</p>
+<ol style="list-style-type: decimal">
+<li>How quickly?</li>
+<li>For how long? &amp;</li>
+<li>With which type of growth (we see a steep curve, but is it… Quadratic? Exponential? Polynomial?)? Overall, is now a good time to be investing in or mining cryptocurrency?</li>
+</ol>
 <p>Most human activities have some sort of seasonality. However, it can be inconsistent when it comes to the stock market.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Regardless of which currency we choose, it is hard to parse out a consistent seasonal pattern. In some years, it looks like price picks up in the middle of the year, while in others the growth is seen at the tails. Since trading is highly responsive to the social climate of the time, it makes sense that season alone isn’t enough to predict pricing. Consecutive closing values appear not to follow one another closely, suggesting an autoregression model for prediction would likely be appropriate, as it often is for stocks.</p>
+<div id="basic-forecasting" class="section level2">
+<h2>Basic Forecasting</h2>
 <p>The most simplistic models for stocks are 3 easy, nonseasonal forecasting methods, and they are often used as benchmarks for future models. The three forecasting methods are:
 </br></p>
 <ol style="list-style-type: decimal">
@@ -88,9 +92,10 @@ where <span class="math inline">\(x_T\)</span> is the final observation, <span c
 </tr>
 </tbody>
 </table>
+</div>
 <div id="identity-crisis-what-am-i" class="section level2">
 <h2>Identity Crisis: What am I?</h2>
-<p>We can tackle questions (1) &amp; (3) from above (what kind of growth is this?, what is the slope?) fairly quickly by fitting a few models and finding the best <span class="math inline">\(R^2\)</span> value. We ask this question because the rate of change for the price variable can help us determine which predictive models would be most effective.</p>
+<p>We can tackle questions (1) &amp; (3) from above (What kind of growth is this? What is the slope?) fairly quickly by fitting a few models and finding the best <span class="math inline">\(R^2\)</span> value. We ask this question because the rate of change for the price variable can help us determine which predictive models would be most effective.</p>
 <p>The outcomes are as follows:</p>
 <table>
 <thead>
@@ -123,11 +128,11 @@ where <span class="math inline">\(x_T\)</span> is the final observation, <span c
 </div>
 <div id="can-we-make-money" class="section level1">
 <h1>Can we make money?</h1>
-<p>The first thing we can do to answer question (2) (how long is the market trending up/down?) is create a <em>simple moving average (MA)</em> or <em>rolling mean</em> for each stock. This is done to make identifying trends easier and to smooth noise from the data set. As we increase the number of days we average over, the MA’s responsiveness to price variation decreases. The formula for the MA is as follows:</p>
-<p>MA = <span class="math inline">\(\frac{1}{q}\Sigma^{q-1}_{i=0} x_{t-1}\)</span>
+<p>The first thing we can do to answer question (2) (How long is the market trending up/down?) is create a <strong>simple moving average (MA)</strong> or <strong>rolling mean</strong> for each stock. This is done to make identifying trends easier and to smooth noise from the data set. As we increase the number of days we average over, the MA’s responsiveness to price variation decreases. The formula for the MA is as follows:
+<span class="math display">\[\frac{1}{q}\Sigma^{q-1}_{i=0} x_{t-1}\]</span>
 </br>
 where <em>q</em> is the number of days considered, from a series <span class="math inline">\(x_t\)</span> during time period <em>t</em>.</p>
-<p>If we choose a smaller window, the MA can adapt faster to changes. Let’s try 7, 15, and 30 day versions of the MA:</p>
+<p>If we choose a smaller window, the MA can adapt faster to changes. Let’s try 7, 15, and 30 day versions of the MA.</p>
 <p>Here is an example of what this would look like for Bitcoin in 2021:</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Using this data, we could build a very simple buy/sell indicator. We would “buy” when MA7 crosses over MA30 upwards and sell when MA7 crosses MA30 downwards. We could build this trigger using Python, and it would work well, for a while.</p>
@@ -135,8 +140,8 @@ where <em>q</em> is the number of days considered, from a series <span class="ma
 <h3>Demonstration:</h3>
 <p>We create a variable for the difference between MA7 and MA30, and watch for a sign change. This model is considered very “unintelligent”, as it cannot learn and adapt from historic data outside the set time period. Sometimes that focus might be useful, but not in all circumstances.</p>
 <p>Continuing the Bitcoin example:
-With this this buy/sell model, let’s see what happened if we followed the model’s buy/sell predictions. Say we first purchase Bitcoin on 1/02, sold on 01/19, purchased again on 02/07, sold on 02/24, purchased on 03/07, sold on 03/20, purchased on 03/29, and finally sold again on 04/05.</p>
-<p>To be more realistic, let’s assume we bought 3.11% of a Bitcoin for 1k on 01/02 of this year.</p>
+With this this buy/sell model, let’s see what happened if we followed the model’s buy/sell predictions. Say we first purchase Bitcoin on 1/02, sold on 01/19, purchased again on 02/07, sold on 02/24, purchased on 03/07, sold on 03/20, purchased on 03/29, and finally sold again on 04/05, all in accordance with the trigger we designed.</p>
+<p>To be more realistic, let’s assume we bought 3.11% of a Bitcoin for $1,000 on 01/02 of this year.</p>
 <table>
 <thead>
 <tr class="header">
@@ -203,12 +208,15 @@ With this this buy/sell model, let’s see what happened if we followed the mode
 </tr>
 </tbody>
 </table>
-<p>Overall, this model made 1,971.65 or 197% in profit. For reference, if we purchased the same amount of Bitcoin on that first day and left it in until the last day, I would have withdrawn 1,805.05, or about 805 dollars of profit.</p>
+<p>Overall, this model made 1,971.65 dollars or 197% in profit.
+For reference, if we purchased the same amount of Bitcoin on that first day and left it in until the last day, I would have withdrawn 1,805.05 dollars.
+This is about 805 dollars of profit, which shows that our model is more profitable than inaction.</p>
 <p>This totals 8 transactions (4 each of Buy/Sell). Of these 8 transactions, the model would have made the correct choice (as compared to the actual market rise/fall) 7/8 (87.5%) times.</p>
 <p><strong>In Sum:</strong> If this (a most simplistic forecasting model) can make money, imagine what we could do with a more complex model (or even better, multiple aggregated complex models). Given current market conditions, this MA model outperforms even Simple Exponential Smoothing (SES) or Autoregressive Integrated Moving Average (ARIMA) models. Overall, it looks like we are expecting an upward trend for cryptocurrency for a little while longer. Good Luck!</p>
-<p><strong>Warning:</strong>
+<p><strong>Warning!</strong>
 </br>The MA made money because it did not have to account for a sign change in the slope. If the market turned and Bitcoin prices declined while the algorithm was running, the MA model would have lost money. In order to be a safe way to make money, there has to be a built-in trigger. If the slope has changed sign for three consecutive measurements, we would instead buy when the difference was negative and sell when the difference turned positive.</p>
-<p>Learn more about how you can acquire cryptocurrency without purchasing it <a href="https://amoderninvestor.netlify.app/27/2021/01/">here</a> or how quantum computers can help miners work more efficiently <a href="https://amoderninvestor.netlify.app/23/2021/01/">here</a>.</p>
+<p>So, let’s say that we decide we want to invest in cryprocurrency but don’t have the funding. What can we do?
+Learn more about how you can acquire cryptocurrency without purchasing it <a href="https://amoderninvestor.netlify.app/27/2021/01/">here</a> or how quantum computers can help miners work more efficiently <a href="https://amoderninvestor.netlify.app/22/2021/01/">here</a>.</p>
 <p><em>Image from schwab.com</em></p>
 </div>
 </div>

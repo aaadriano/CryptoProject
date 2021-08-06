@@ -34,6 +34,6 @@ Here is a list of the most popular cryptocurrencies and their most recent price:
 
 *Last Updated 08/08/2021 @ 1:30pm EST
 
-Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://amoderninvestor.netlify.app/23/2021/01/).
+Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://amoderninvestor.netlify.app/22/2021/01/).
 
 *Image from Vectra.ai*

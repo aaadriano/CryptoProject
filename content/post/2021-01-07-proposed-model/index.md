@@ -3,16 +3,18 @@ title: Quantum Mining Model
 author: ''
 date: '2021-01-22'
 ---
-
 <center>
 </br>
 <img src="https://images-global.nhst.tech/image/QjJSOC9UZ2dQY25EY3RManFqc0grZ1Vja2FvQ1hTU3dlcVZadmlGSm9BMD0=/nhst/binary/358d239815f9af49ca6409c4962e868c">
 </center>
 
-Now that we have covered [what cryptocurrency is](https://wucrypto-project.netlify.app/) and [how mining it works](https://wucrypto-project.netlify.app/), we apply our two special tools ([Quantum Computers](https://wucrypto-project.netlify.app/) and [Grover's Algorithm](https://wucrypto-project.netlify.app/)).
+Now that we have covered [what cryptocurrency is](https://amoderninvestor.netlify.app/30/2021/01/) and [how mining it works](https://amoderninvestor.netlify.app/27/2021/01/), we apply our two special tools ([Quantum Computers](https://amoderninvestor.netlify.app/29/2021/01/) and [Grover's Algorithm](https://amoderninvestor.netlify.app/26/2021/01/)).
 
 **Theory**
+</br>
 We need to find a specific (or smaller) sequence of 64 letters and numbers. Cryptocurrency mining involves  repeatedly changing our guess until we find a sequence that works. On a classic computer, this can only be done using exhaustive, brute force methods. This takes a long time and is difficult to do, hence the high rewards for success.
+
+As of this post, the reward is 6.25 BTC for finishing a block. Since the price is at $
 
 For each position of the 64, there are 16 possibilities: 0 though 9 and a, b, c, d, e, and f. At the moment, we also know that the first 8 to 64 positions must be "0". As of 08/04/2021, the number of leading zeros is 17. This means that we are realistically trying to compute 48 digits. 
 

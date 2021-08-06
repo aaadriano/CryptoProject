@@ -29,6 +29,6 @@ There are some other differences between classical and quantum computers, but th
 
 There is no commercially available quantum computer, as their development is long and very expensive. However, quantum technologies are available without having to build the machine yourself. IBM allows access to its computers via the [IBM Quantum Network](https://quantum-computing.ibm.com/). IBM plans to have a 1,000-qubit quantum computer in place by 2023.
 
-Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://amoderninvestor.netlify.app/23/2021/01/).
+Now that you know the basics, learn more about this project and its applications to cryptocurrency [here](https://amoderninvestor.netlify.app/22/2021/01/).
 
 *Image from LiveScience.com*
