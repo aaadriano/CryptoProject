@@ -147,7 +147,7 @@ For this forecasting, I used two different data sets. The first was a list of qu
 The second data set was taken from [blockchain.info](https://www.blockchain.com/charts/hash-rate?timespan=all&daysAverageString=7&scale=1) and used to model hashing power of each computer. 
 The first series of predictive models found that qubit growth has been historically exponential and such a model is still the best fit. We found that the estimate for ambitions growth will see the number of qubits double every year while the conservative estimate believes it to double every two years. I fit a model to the original data and then generated the two precitions of varying strictness.
 <img src="3.png">
-By our computation, we expect By our computation, we expect:
+By our computation, we expect:
 
 | Number of Qubits (Min) | Number of Qubits (Max)     | Year |
 |--------|--------------|-------------|
