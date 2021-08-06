@@ -41,6 +41,7 @@ The number of qubits available to a quantum computer would change the outcome, b
 One could ask, how many qubits will be available in the near future? To answer this, we have to look at the rate of growth quantum computers have shown in recent years and generate a new model for predicting qubit availability. Qubit growth has been historically exponential, and we verify that the model is still the best fit in this case. We found that the estimate for ambitions growth will see the number of qubits double every year while the conservative estimate believes it to double every two years.
 
 Here is an example of the data:
+
 | Number of Qubits | Year| Quantum Computer |
 |--------|--------------|-------------|
 | 2    | 2013 |IBM |
@@ -52,7 +53,7 @@ Here is an example of the data:
 | 49   | 2018 |Google|
 | ...  | ...  |...|
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE, MESSAGE=FALSE}
 x= c(2013,2014,2014,2016,2017,2017,2018)
 y= c(2,5,3,5,16,20,49)
 xy <- data.frame(x, y)
@@ -80,6 +81,7 @@ ggplot(result, aes(x = x, y = Qubits)) +
 ```
 
 By our computation, we expect:
+
 | Number of Qubits (Min) | Number of Qubits (Max)     | Year |
 |--------|--------------|-------------|
 | 82    | 420 |2025|
@@ -104,6 +106,7 @@ ggplot(xy2, aes(x = x2, y = y2)) +
 ```
 
 By our computation, we expect:
+
 | Hash Rate (Min) | Hash Rate (Max)     | Year |
 |--------|--------------|-------------|
 | $10^{19}$    | $10^{21}$  |2025|
@@ -112,7 +115,9 @@ By our computation, we expect:
 | $10^{19.8}$    | $10^{21.8}$ |2040|
 | ...   | ...      |...|
 
-In sum, the technology will be available shortly such that it will allow us an advantage over classic mining techniques. By 2025, we will have access to quantum computers strong enough (min. 1e+19 ash rate) and large enough (min. 82 qubits). This will allow quantum computers to be competitive against even resistant Bitcoin networks and add an advantage to mining through quadratic speedups due to parallel processing.
+In sum, the technology will be available shortly such that it will allow us an advantage over classic mining techniques. By 2025, we will have access to quantum computers strong enough (min. 1e+19 hash rate) and large enough (min. 82 qubits). This will allow quantum computers to be competitive against even resistant Bitcoin networks and add an advantage to mining through quadratic speedups due to parallel processing.
+
+My chances of successfully mining a block on my laptop would be about $(\frac{1811.35*14,496,442,856,349}{2^{256}})$, or 2.268e-61, while my chances of doing to on a quantum computer with a 2020 hash rate would be about $sin^{2}(2*10^{19}\sqrt{14,496,442,856,349/2^{256}})$, or 5.01e-26. Those both are very small numbers, but hopefully it is evident how much better 0.0000000000000000000000000501 is than 0.000000000000000000000000000000000000000000000000000000000000227.
 
 *Limitations*
 
