@@ -1,5 +1,5 @@
 ---
-date: "2021-01-31"
+date: "2021-02-01"
 title: Introduction
 ---
 <center>
@@ -22,5 +22,7 @@ This body of work pairs those two exiting innovations together, developing a fra
 - Click [here](https://amoderninvestor.netlify.app/30/2021/01/) to learn about cryptocurrency instead.
 
 - If you are comfortable with both of those, click [here](https://amoderninvestor.netlify.app/22/2021/01/) to find out about more about this project.
+
+- If you're just looking for the quick-and-dirty version of the quantum cryptocurrency mining, click [here](https://amoderninvestor.netlify.app/31/2021/01/) for the overview.
 
 *Image from TechFunnel.com*

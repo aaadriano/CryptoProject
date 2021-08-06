@@ -10,18 +10,11 @@ date: '2021-01-21'
 </center>
 
 
-"It is well-known that the heart of Bitcoin is
-cryptography [1], and quantum computers are particularly good at difficult problems like
-searching and code breaking. This opens up many questions regarding how quantum 
-computing is going to impact Bitcoin. "
-For quantum mining, the quantum advantage is limited, hence very fast
-quantum hash rates would be required. F
+Bitcoin is built on cryptography, and neither cryptocurrency nor quantum computing are going to be left behind in this technological arms race. Computers are exceptionally useful in helping us solve difficult computational problems, and cryptocurrency mining is no different. The benefits (and threats) of quantum computing on searching and code breaking should not be undervalued, and as this technology continues to grow, so will the opportunities.
 
-Looking into the future, one can imagine a quantum arms race between exotic forms of
-cryptography and quantum algorithms to break them. In such a scenario, the development of
-Qubitcoins -- quantum versions of Bitcoin that are based on quantum mechanics -- will
-become a real necessity. In a future where quantum technologies are commonplace it will
-make the most sense to re-invent the blockchain and transaction chain with the methods of
-quantum cryptography. 
+At the moment, quantum Bitcoin mining has some limitations, but by 2025 these devices will not only be more accessible, but will also have very fast quantum hash rates for a greater number of qubits. Even at today's computational level, a quantum computer could give someone a xxx% increase to their success rate in cryptocurrency mining.
+
+The future will be such where quantum technologies are commonplace, spurring the reinvention of blockchain and transaction chain technologies via quantum cryptography.
+
 
 *Image from future-tech.co.uk*
