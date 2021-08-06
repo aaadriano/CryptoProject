@@ -11,12 +11,16 @@ date: '2021-01-24'
 
 The Black-Scholes Model was developed as a way to use mathematics to price stock options. It is a differential equation that estimates price over time, and won the authors a Nobel prize in economics. You can find their original work [here](https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf).
 
-Model Components: asset price; strike price; interest rates; time to expiration; and volatility. Most of these terms should be familiar, but the **strike price** is the set price at which an option can be bought/sold. The *time to expiration* is the the exact date and time when the contract to buy/sell is rendered void.
+Model Components: asset price; strike price; interest rates; time to expiration; and volatility. 
+Most of these terms should be familiar, but the **strike price** is the set price at which an option can be bought/sold. The **time to expiration** is the the exact date and time when the contract to buy/sell is rendered void.
 
 The mathematical formula can be expressed as follows:
 $$C=S_tN(d_1)-Ke^{-rt}N(d_2)$$
-\textbf{where:}
+</br>
+where 
+
 $$d_1=\frac{\ln\big(\frac{S_t}{K}\big)+\big(r+\frac{\sigma_v^2}{2}\big)t}{\sigma_s\sqrt{t}}\quad\text{and}\quad d_2=d_1-\sigma_s\sqrt{t}$$
+
 \textbf{where:}
 \begin{align*}
 C&=\text{Call option price}\\
@@ -30,6 +34,7 @@ N&=\text{A normal distribution}\\
 The Black-Scholes theory was that stocks and futures contracts have a lognormal distribution of prices, with constant drift and volatility.
 
 The Black-Scholes model requires several assumptions:
+
 - The only options being mapped are European options exercised at the moment of expiration.
 - The option pays no dividends
 - Market movements themselves cannot be predicted

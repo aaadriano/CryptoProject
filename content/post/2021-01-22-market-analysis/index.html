@@ -23,26 +23,26 @@ Variables of interest are Currency, Date, Closing Price, the 24h High, and the 2
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Regardless of which currency we choose, it is hard to parse out a consistent seasonal pattern. In some years, it looks like price picks up in the middle of the year, while in others the growth is seen at the tails. Since trading is highly responsive to the social climate of the time, it makes sense that season alone isn’t enough to predict pricing. Consecutive closing values appear not to follow one another closely, suggesting an autoregression model for prediction would likely be appropriate, as it often is for stocks.</p>
 <p>The most simplistic models for stocks are 3 easy, nonseasonal forecasting methods, and they are often used as benchmarks for future models. The three forecasting methods are:
-</br>
-1. Average method, literally the mean of all selected historic data, expressed as
+</br></p>
+<ol style="list-style-type: decimal">
+<li><p>Average method, literally the mean of all selected historic data, expressed as
 </br>
 AM = <span class="math inline">\(\frac{\Sigma^{T}_{t=1} x_{t}}{T}\)</span>
 </br>
 where <span class="math inline">\(x_t\)</span> is the observation at a given time <em>t</em> and <em>T</em> is the total number of observations
-</br></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Naïve method, also know as the value for the most recent observation, expressed as
+</br></p></li>
+<li><p>Naïve method, also know as the value for the most recent observation, expressed as
 </br>
 NM = <span class="math inline">\(x_{T}\)</span>
 </br>
-where <span class="math inline">\(x_T\)</span> is the final observation
-</br></li>
-</ol>
-<p>&amp; 3. Drift method, dependent on the average slope between the first and final observations, expressed as
+where <span class="math inline">\(x_T\)</span> is the final observation &amp;
+</br></p></li>
+<li><p>Drift method, dependent on the average slope between the first and final observations, expressed as
 </br>
 DM = <span class="math inline">\(x_T + h(\frac{x_T-x_1}{T-1})\)</span>
 </br>
-where <span class="math inline">\(x_T\)</span> is the final observation, <span class="math inline">\(x_1\)</span> is the first observation, <em>T</em> is the total number of observations, and <em>h</em> is the number of days included in the forecast.</p>
+where <span class="math inline">\(x_T\)</span> is the final observation, <span class="math inline">\(x_1\)</span> is the first observation, <em>T</em> is the total number of observations, and <em>h</em> is the number of days included in the forecast.</p></li>
+</ol>
 <p>This is what they look like when applied to Etherium.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>We can measure to see how well these models performed in comparison against the actual value and against each other using the MAPE, or mean absolute percentage error. We want the lowest error values, so the “drift” forecast seems to be the best. However, these are not good estimates, and we expect to outperform them even with simple time series models.</p>

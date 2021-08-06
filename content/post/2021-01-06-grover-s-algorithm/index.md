@@ -11,7 +11,7 @@ Tags:
   - Development
   - golang
 ---
-<span style="color:red"><center>
+<center>
 </br>
 <img src="https://www.udacity.com/blog/wp-content/uploads/2020/07/Search-Algorithms_Blog-scaled.jpeg">
 </center>
@@ -68,14 +68,8 @@ Specifically, consider the unitary linear transformation of dimension $(n,n)$:
 
 where $|w>$ is the ket vector corresponding to the object $w$. Then, it will act on any ket thusly:
 
-$$
-U_\omega|x\rangle = \bigg\{
-\begin{aligned}
-\phantom{-}|x\rangle \quad \text{if} \; x \neq \omega \\
--|x\rangle \quad \text{if} \; x = \omega \\
-\end{aligned}
-$$
-
+$$U_{\omega}|x\rangle=\hphantom{-}|x\rangle\quad\text{if }x\neq\omega$$
+$$U_{\omega}|x\rangle=-|x\rangle\quad\text{if }x=\omega$$
 
 This oracle will be a diagonal matrix, where the entry that correspond to the marked item will have a negative phase. For example, if we have three qubits and $\omega = |101\rangle$, our oracle will have the matrix:
 
@@ -210,4 +204,4 @@ $\theta$ $\approx$ $\frac{1}{\sqrt{N-1}}$
 ****
 Whew. Now that we can build an oracle and run a Grover Algorithm, we can move on to the next portion of this project [here](https://amoderninvestor.netlify.app/23/2021/01/).
 
-*Image from udacity.com*</span>
+*Image from udacity.com*

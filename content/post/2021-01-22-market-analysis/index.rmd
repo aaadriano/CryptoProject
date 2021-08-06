@@ -58,10 +58,10 @@ Regardless of which currency we choose, it is hard to parse out a consistent sea
 
 The most simplistic models for stocks are 3 easy, nonseasonal forecasting methods, and they are often used as benchmarks for future models. The three forecasting methods are:
 </br>
+
 1. Average method,  literally the mean of all selected historic data, expressed as
 </br>
 AM = $\frac{\Sigma^{T}_{t=1} x_{t}}{T}$ 
-``{r}
 </br>
 where $x_t$ is the observation at a given time *t* and *T* is the total number of observations
 </br>
@@ -70,10 +70,10 @@ where $x_t$ is the observation at a given time *t* and *T* is the total number o
 </br>
 NM = $x_{T}$ 
 </br>
-where $x_T$ is the final observation
+where $x_T$ is the final observation &
 </br>
 
-& 3. Drift method, dependent on the average slope between the first and final observations, expressed as
+3. Drift method, dependent on the average slope between the first and final observations, expressed as
 </br>
 DM = $x_T + h(\frac{x_T-x_1}{T-1})$ 
 </br>
